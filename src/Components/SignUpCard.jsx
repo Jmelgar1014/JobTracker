@@ -5,18 +5,18 @@ import supabase from "../../supaBaseData";
 
 // Create a single supabase client for interacting with your database
 
-const LoginCard = () => {
+const SignUpCard = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  async function signIn(email, password) {
-    const { data, error } = await supabase.auth.signInWithPassword({
+  async function signUp(email, password) {
+    const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
     if (data.session) {
-      navigate("/home");
+      navigate("/verify");
     }
 
     if (error) {
@@ -27,7 +27,7 @@ const LoginCard = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    signIn(email, password);
+    signUp(email, password);
   };
   const linkClass = ({ isActive }) =>
     isActive ? "navbar-list-items-active" : "navbar-list-items";
@@ -45,7 +45,7 @@ const LoginCard = () => {
                 SignUp
               </NavLink>
             </div>
-            <p>Enter your credentials to access your account</p>
+            <p>Fill in your information to create an account</p>
           </div>
           <div className="login-form">
             <form action="">
@@ -75,11 +75,9 @@ const LoginCard = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <div className="forgot-password">
-                <button>Forgot your password?</button>
-              </div>
+
               <button className="login-btn" onClick={handleSubmit}>
-                Sign In
+                Sign Up
               </button>
             </form>
           </div>
@@ -89,4 +87,4 @@ const LoginCard = () => {
   );
 };
 
-export default LoginCard;
+export default SignUpCard;
