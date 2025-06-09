@@ -74,14 +74,17 @@ const HomePage = () => {
 
       formData.userId = session.user.id;
 
-      const response = await fetch("http://localhost:5195/api/jobapplication", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://jobtrackerapi.fly.dev/api/jobapplication",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         console.log("request success");
@@ -119,13 +122,16 @@ const HomePage = () => {
         console.log("no valid token");
       }
 
-      const response = await fetch("http://localhost:5195/api/jobapplication", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://jobtrackerapi.fly.dev/api/jobapplication",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const data = await response.json();
       console.log(token);
@@ -160,14 +166,17 @@ const HomePage = () => {
 
       console.log(updatedJobs[index]);
 
-      await fetch(`http://localhost:5195/api/jobapplication/${itemId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(newStatus),
-      });
+      await fetch(
+        `https://jobtrackerapi.fly.dev/api/jobapplication/${itemId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(newStatus),
+        }
+      );
       console.log(newStatus);
       fetchJobs();
     } catch (error) {
@@ -188,12 +197,15 @@ const HomePage = () => {
       if (!token) {
         console.log("no valid token");
       }
-      await fetch(`http://localhost:5195/api/jobapplication/${itemId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await fetch(
+        `https://jobtrackerapi.fly.dev/api/jobapplication/${itemId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       fetchJobs();
     } catch (e) {

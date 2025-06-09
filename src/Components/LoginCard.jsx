@@ -24,8 +24,9 @@ const LoginCard = () => {
     }
   }
 
-  const handleSubmit = () => {
-    signIn(email, password);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await signIn(email, password);
   };
   const linkClass = ({ isActive }) =>
     isActive ? "navbar-list-items-active" : "navbar-list-items";
@@ -46,7 +47,7 @@ const LoginCard = () => {
             <p>Enter your credentials to access your account</p>
           </div>
           <div className="login-form">
-            <form action={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <div className="login">
                 <label htmlFor="email" className="label">
                   Email
