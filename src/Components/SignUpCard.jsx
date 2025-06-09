@@ -15,7 +15,7 @@ const SignUpCard = () => {
       email: email,
       password: password,
     });
-    if (data.session) {
+    if (data.user) {
       navigate("/verify");
     }
 

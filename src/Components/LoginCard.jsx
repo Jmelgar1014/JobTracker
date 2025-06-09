@@ -24,9 +24,7 @@ const LoginCard = () => {
     }
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     signIn(email, password);
   };
   const linkClass = ({ isActive }) =>
@@ -48,7 +46,7 @@ const LoginCard = () => {
             <p>Enter your credentials to access your account</p>
           </div>
           <div className="login-form">
-            <form action="">
+            <form action={handleSubmit}>
               <div className="login">
                 <label htmlFor="email" className="label">
                   Email
@@ -78,7 +76,7 @@ const LoginCard = () => {
               <div className="forgot-password">
                 <button>Forgot your password?</button>
               </div>
-              <button className="login-btn" onClick={handleSubmit}>
+              <button type="submit" className="login-btn">
                 Sign In
               </button>
             </form>

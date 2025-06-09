@@ -3,18 +3,16 @@ import NavBar from "../Components/NavBar";
 import { ApplicationTitle } from "../Components/ApplicationTitle";
 import ApplicationForm from "../Components/ApplicationForm";
 import JobList from "../Components/JobList";
-import SignOut from "../Components/SignOut";
 import { useState, useEffect } from "react";
 import supabase from "../../supaBaseData";
 import EmptyList from "../Components/EmptyList";
 import Spinner from "../Components/Spinner";
-import ApplicationCount from "../Components/ApplicationCount";
-import InterviewCount from "../Components/InterviewCount";
-import OfferCount from "../Components/OfferCount";
 import TotalCounts from "../Components/TotalCounts";
+
 const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const [jobs, setJobs] = useState([]);
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     company: "",
     jobTitle: "",
@@ -24,16 +22,44 @@ const HomePage = () => {
     userId: "",
   });
 
+  const recentJobs = jobs.slice(0, 10);
+  console.log(recentJobs.length);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+    if (errors[name]) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: false,
+      }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    const requiredField = ["company", "salary", "jobTitle", "AppliedAt"];
+
+    requiredField.forEach((item) => {
+      if (!formData[item] || formData[item].trim() === "") {
+        newErrors[item] = true;
+      }
+    });
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      console.log("all inputs need to be entered");
+      return;
+    }
 
     try {
       const {
@@ -105,12 +131,14 @@ const HomePage = () => {
       console.log(token);
       setJobs(data);
       console.log(data);
+      console.log("above is the jobs var");
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchJobs();
   }, []);
@@ -141,6 +169,7 @@ const HomePage = () => {
         body: JSON.stringify(newStatus),
       });
       console.log(newStatus);
+      fetchJobs();
     } catch (error) {
       console.log(error);
     }
@@ -165,6 +194,7 @@ const HomePage = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       fetchJobs();
     } catch (e) {
       console.log(e);
@@ -180,20 +210,20 @@ const HomePage = () => {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         formData={formData}
+        errors={errors}
       />
       <TotalCounts count={jobs} />
       {loading ? (
         <Spinner />
       ) : jobs.length > 0 ? (
         <JobList
-          jobs={jobs}
+          jobs={recentJobs}
           handleStatusChange={handleStatusChange}
           deleteJob={deleteJob}
         />
       ) : (
         <EmptyList />
       )}
-      {/* {} */}
     </>
   );
 };

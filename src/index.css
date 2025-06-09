@@ -3,7 +3,9 @@
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
 body {
+  height: 100vh;
   margin: 0;
   background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
 }
@@ -35,6 +37,7 @@ body {
 .navbar-list-items {
   color: black;
   padding: 0.5rem;
+  margin-right: 0.5rem;
 }
 .navbar-list-items:hover {
   background-color: rgba(0, 0, 0, 0.05);
@@ -44,8 +47,9 @@ body {
 .navbar-list-items-active {
   background-color: black;
   color: #ffffff;
-  padding: 8px;
+  padding: 0.5rem;
   border-radius: 5px;
+  margin-right: 0.5rem;
 }
 .navbar-title {
   margin: 0;
@@ -136,6 +140,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .list {
@@ -154,6 +159,18 @@ body {
   justify-content: space-between;
 
   padding: 0.5rem;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-page {
+  justify-content: center;
 }
 
 .login-title-container {
@@ -184,7 +201,8 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
-.login-btn:hover {
+.login-btn:hover,
+.btn:hover {
   background-color: rgb(29, 78, 216);
 }
 .card-container {
@@ -250,6 +268,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 .spinner-container {
@@ -264,7 +283,7 @@ body {
 #nav-items {
   list-style: none;
   display: flex;
-  margin: 0.5rem;
+
   cursor: pointer;
   font-size: 1rem;
   color: black;
@@ -349,7 +368,7 @@ a {
 }
 
 #email,
-#password {
+#passwor {
   padding: 8px 12px;
   height: 26px;
   margin-top: 0.5rem;
@@ -383,4 +402,115 @@ a {
 
 .forgot-password > button:hover {
   text-decoration: underline;
+}
+
+.verify-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.verify-container {
+  display: flex;
+  justify-content: center;
+}
+
+.verify-card {
+  width: 25rem;
+  height: 20rem;
+  border-radius: 5px;
+}
+
+.verify-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.verify-title > h2 {
+  margin-bottom: 0;
+}
+
+.verify-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(219, 234, 254);
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+}
+
+.verify-logo > svg {
+  color: #2563eb;
+}
+
+.verify-steps-container {
+  display: flex;
+}
+
+.verify-steps {
+  display: flex;
+  /* justify-content: space-between; */
+}
+.verify-steps-num {
+  background-color: rgb(219, 234, 254);
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2563eb;
+}
+
+.verify-steps-num-check {
+  background-color: rgb(220, 252, 231);
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: green;
+}
+
+.verify-steps-num-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.verify-steps > p {
+  color: rgb(51, 65, 85);
+  font-size: 14px;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-errors {
+  border: 2px solid #e74c3c !important;
+  background-color: #fdf2f2;
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.3);
+}
+
+.input-errors:focus {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
+  outline: none;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+  font-weight: 500;
 }

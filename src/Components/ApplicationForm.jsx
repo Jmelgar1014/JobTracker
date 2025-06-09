@@ -1,70 +1,6 @@
 import React from "react";
 import JobList from "./JobList";
-const ApplicationForm = ({ handleChange, handleSubmit, formData }) => {
-  // const [formData, setFormData] = useState({
-  //   company: "",
-  //   jobTitle: "",
-  //   salary: "",
-  //   AppliedAt: "",
-  //   status: "Applied",
-  //   userId: "",
-  // });
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const {
-  //       data: { session },
-  //     } = await supabase.auth.getSession();
-
-  //     const token = session?.access_token; // Available globally
-  //     if (!session || !token) {
-  //       console.error("No active session");
-  //       return;
-  //     }
-
-  //     formData.userId = session.user.id;
-
-  //     const response = await fetch("http://localhost:5195/api/jobapplication", {
-  //       method: "POST",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(formData),
-  //     });
-
-  //     if (response.ok) {
-  //       console.log("request success");
-  //     } else {
-  //       console.log("request failed");
-  //     }
-
-  //     setFormData({
-  //       company: "",
-  //       jobTitle: "",
-  //       salary: "",
-  //       AppliedAt: "",
-  //       status: "Applied",
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     console.log("success");
-  //   }
-
-  //   console.log("form submitted:", formData);
-  // };
-
+const ApplicationForm = ({ handleChange, handleSubmit, formData, errors }) => {
   return (
     <>
       <div className="application-container">
@@ -83,7 +19,11 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData }) => {
                   name="company"
                   onChange={handleChange}
                   value={formData.company}
+                  className={errors.company ? "input-errors" : ""}
                 />
+                {errors.company && (
+                  <span className="error-message">Company is required </span>
+                )}
               </div>
               <div className="input-items">
                 <label htmlFor="jobTitle">Job Title</label>
@@ -93,19 +33,27 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData }) => {
                   name="jobTitle"
                   onChange={handleChange}
                   value={formData.jobTitle}
+                  className={errors.jobTitle ? "input-errors" : ""}
                 />
+                {errors.jobTitle && (
+                  <span className="error-message">Company is required </span>
+                )}
               </div>
             </div>
             <div className="input-container">
               <div className="input-items">
                 <label htmlFor="salary">Salary Range</label>
                 <input
-                  type="text"
+                  type="number"
                   id="salary"
                   name="salary"
                   onChange={handleChange}
                   value={formData.salary}
+                  className={errors.salary ? "input-errors" : ""}
                 />
+                {errors.salary && (
+                  <span className="error-message">Company is required </span>
+                )}
               </div>
               <div className="input-items">
                 <label htmlFor="AppliedAt">Date Applied</label>
@@ -115,7 +63,11 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData }) => {
                   name="AppliedAt"
                   onChange={handleChange}
                   value={formData.AppliedAt}
+                  className={errors.AppliedAt ? "input-errors" : ""}
                 />
+                {errors.AppliedAt && (
+                  <span className="error-message">Company is required </span>
+                )}
               </div>
             </div>
             <div className="btn-container">
