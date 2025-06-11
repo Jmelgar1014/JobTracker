@@ -1,11 +1,12 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import supabase from "../../supaBaseData";
 
 // Create a single supabase client for interacting with your database
 
 const LoginCard = () => {
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -28,6 +29,13 @@ const LoginCard = () => {
     e.preventDefault();
     await signIn(email, password);
   };
+  const signInLink = ({ isActive }) => {
+    const currentPath = location.pathname;
+
+    const isSignInActive = isActive || currentPath === "/";
+
+    return isSignInActive ? "navbar-list-items-active" : "navbar-list-items";
+  };
   const linkClass = ({ isActive }) =>
     isActive ? "navbar-list-items-active" : "navbar-list-items";
 
@@ -37,7 +45,7 @@ const LoginCard = () => {
         <div className="card component-shadow">
           <div className="card-title">
             <div className="card-btns">
-              <NavLink to="/login" className={linkClass}>
+              <NavLink to="/login" className={signInLink}>
                 Sign In
               </NavLink>
               <NavLink to="/signup" className={linkClass}>

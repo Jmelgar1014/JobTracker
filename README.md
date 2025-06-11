@@ -1,12 +1,22 @@
-# React + Vite
+Job Tracker App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Job Tracker is a web app to be able to help users manage all of their job applications without having to worry about templates for excel or notion. All users need to do is input basic application data and it will be stored. You can also manage that status of the application and change it to "interview" , "Offer", or "Rejected".
 
-Currently, two official plugins are available:
+The web app is live for usage at the following link: https://apptracking.netlify.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Features:
 
-## Expanding the ESLint configuration
+Authentication with Supabase
+View Total job applications
+View counts for interviews and offers
+Update application status
+Delete Applications
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Stack:
+Frontend - React, Javascript, CSS
+Backend - ASP.Net core, Entity Framework
+Auth and DB - Supabase
+
+Future Features:
+Modifiy all application data ie.(salary,date applied, title)
+Add confirmation to delete application
