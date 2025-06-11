@@ -1,14 +1,16 @@
-import HomePage from "./Pages/HomePage";
+import { lazy, Suspense } from "react";
+import Spinner from "./Components/Spinner";
 import {
   Route,
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
+const ApplicationsPage = lazy(() => import("./Pages/ApplicationsPage"));
+const VerifyPage = lazy(() => import("./Pages/VerifyPage"));
+const HomePage = lazy(() => import("./Pages/HomePage"));
 import LoginPage from "./Pages/LoginPage";
-import ApplicationsPage from "./Pages/ApplicationsPage";
 import SignUpPage from "./Pages/SignUpPage";
-import VerifyPage from "./Pages/VerifyPage";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 
 const router = createBrowserRouter(
@@ -18,9 +20,30 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route element={<ProtectedRoutes />}>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/applications" element={<ApplicationsPage />} />
-        <Route path="/verify" element={<VerifyPage />} />
+        <Route
+          path="/home"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <HomePage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/applications"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <ApplicationsPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/verify"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <VerifyPage />
+            </Suspense>
+          }
+        />
       </Route>
     </>
   )
