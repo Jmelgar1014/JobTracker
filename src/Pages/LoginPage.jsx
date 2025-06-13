@@ -9,9 +9,6 @@ const LoginPage = () => {
     <>
       <LoginNavBar />
       <Login />
-      {/* <LoginNavBar />
-      <LoginTitle />
-      <LoginCard /> */}
     </>
   );
 };

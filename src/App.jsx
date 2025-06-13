@@ -12,6 +12,8 @@ const HomePage = lazy(() => import("./Pages/HomePage"));
 import LoginPage from "./Pages/LoginPage";
 import SignUpPage from "./Pages/SignUpPage";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
+import { AuthProvider } from "./Context/AuthContext";
+import { JobProvider } from "./Context/JobContext";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +38,7 @@ const router = createBrowserRouter(
             </Suspense>
           }
         />
+
         <Route
           path="/verify"
           element={
@@ -49,7 +52,13 @@ const router = createBrowserRouter(
   )
 );
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <JobProvider>
+        <RouterProvider router={router} />
+      </JobProvider>
+    </AuthProvider>
+  );
 }
 
 export default App;
