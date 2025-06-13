@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Spinner from "./Components/Spinner";
 import {
   Route,
@@ -51,13 +52,17 @@ const router = createBrowserRouter(
     </>
   )
 );
+
+const queryClient = new QueryClient();
 function App() {
   return (
-    <AuthProvider>
-      <JobProvider>
-        <RouterProvider router={router} />
-      </JobProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <JobProvider>
+          <RouterProvider router={router} />
+        </JobProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 

@@ -1,12 +1,12 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useAuth } from "./AuthContext";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const JobContext = createContext();
 
 export const JobProvider = ({ children }) => {
   const { token, user } = useAuth();
-  const [loading, setLoading] = useState(false);
-  const [jobs, setJobs] = useState([]);
+  const queryClient = useQueryClient();
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     company: "",
@@ -17,9 +17,23 @@ export const JobProvider = ({ children }) => {
     userId: "",
   });
 
-  console.log(token);
+  const { data: jobs = [], isLoading: loading } = useQuery({
+    queryKey: ["jobs"],
+    queryFn: async () => {
+      const response = await fetch(
+        "https://jobtrackerapi.fly.dev/api/jobapplication",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.json();
+    },
+    enabled: !!token,
+  });
+
   const recentJobs = jobs.slice(0, 10);
-  console.log(recentJobs.length);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +48,19 @@ export const JobProvider = ({ children }) => {
       }));
     }
   };
+
+  const updateJobStatus = useMutation({
+    mutationFn: async ({ id, status }) =>
+      fetch(`https://jobtrackerapi.fly.dev/api/jobapplication/${id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(status),
+      }),
+    onSuccess: () => queryClient.invalidateQueries(["jobs"]),
+  });
 
   const validateForm = () => {
     const newErrors = {};
@@ -50,156 +77,44 @@ export const JobProvider = ({ children }) => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const addJob = useMutation({
+    mutationFn: async (newJob) => {
+      await fetch("https://jobtrackerapi.fly.dev/api/jobapplication", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newJob),
+      });
+      // return res.json();
+    },
+    onSuccess: () => queryClient.invalidateQueries(["jobs"]),
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
 
-    if (!validateForm()) {
-      console.log("all inputs need to be entered");
-      return;
-    }
-
-    try {
-      // const {
-      //   data: { session },
-      // } = await supabase.auth.getSession();
-
-      // const token = session?.access_token; // Available globally
-      // if (!session || !token) {
-      //   console.error("No active session");
-      //   return;
-      // }
-
-      formData.userId = user.id;
-
-      const response = await fetch(
-        "https://jobtrackerapi.fly.dev/api/jobapplication",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      if (response.ok) {
-        console.log("request success");
-      } else {
-        console.log("request failed");
-      }
-
-      setFormData({
-        company: "",
-        jobTitle: "",
-        salary: "",
-        AppliedAt: "",
-        status: "Applied",
-      });
-      fetchJobs();
-    } catch (error) {
-      console.log(error);
-    } finally {
-      console.log("success");
-    }
-
-    console.log("form submitted:", formData);
+    const payload = { ...formData, userId: user.id };
+    await addJob.mutateAsync(payload);
+    setFormData({
+      company: "",
+      jobTitle: "",
+      salary: "",
+      AppliedAt: "",
+      status: "Applied",
+    });
   };
-
-  const fetchJobs = async () => {
-    if (!token) {
-      console.log("No token available, skipping fetch");
-      return;
-    }
-    setLoading(true);
-    try {
-      // const {
-      //   data: { session },
-      // } = await supabase.auth.getSession();
-
-      // const token = session?.access_token; // Available globally
-
-      // if (!token) {
-      //   console.log("no valid token");
-      // }
-
-      const response = await fetch(
-        "https://jobtrackerapi.fly.dev/api/jobapplication",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const data = await response.json();
-      console.log(token);
-      setJobs(data);
-      console.log(data);
-      console.log("above is the jobs var");
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (token) {
-      fetchJobs();
-    }
-  }, [token]);
 
   const handleStatusChange = async (index, newStatus, itemId) => {
-    try {
-      // const {
-      //   data: { session },
-      // } = await supabase.auth.getSession();
-
-      // const token = session?.access_token; // Available globally
-
-      // if (!token) {
-      //   console.log("no valid token");
-      // }
-      const updatedJobs = [...jobs];
-      updatedJobs[index].status = newStatus;
-      setJobs(updatedJobs);
-
-      console.log(updatedJobs[index]);
-
-      await fetch(
-        `https://jobtrackerapi.fly.dev/api/jobapplication/${itemId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(newStatus),
-        }
-      );
-      console.log(newStatus);
-      fetchJobs();
-    } catch (error) {
-      console.log(error);
-    }
+    await updateJobStatus.mutateAsync({ id: itemId, status: newStatus });
   };
 
-  const deleteJob = async (itemId) => {
-    console.log("I have been pressed");
-    setLoading(true);
-    try {
-      // const {
-      //   data: { session },
-      // } = await supabase.auth.getSession();
-
-      // const token = session?.access_token; // Available globally
-
-      // if (!token) {
-      //   console.log("no valid token");
-      // }
+  const deleteJob = useMutation({
+    mutationFn: async (itemId) => {
+      //console.log("I have been pressed");
+      //setLoading(true);
       await fetch(
         `https://jobtrackerapi.fly.dev/api/jobapplication/${itemId}`,
         {
@@ -209,14 +124,9 @@ export const JobProvider = ({ children }) => {
           },
         }
       );
-
-      fetchJobs();
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+    onSuccess: () => queryClient.invalidateQueries(["jobs"]),
+  });
 
   return (
     <JobContext.Provider
@@ -227,9 +137,8 @@ export const JobProvider = ({ children }) => {
         formData,
         handleChange,
         handleSubmit,
-        fetchJobs,
         handleStatusChange,
-        deleteJob,
+        deleteJob: (id) => deleteJob.mutate(id),
         recentJobs,
       }}
     >
