@@ -62,6 +62,7 @@ body {
 .application-title {
   display: flex;
   justify-content: center;
+  margin-top: 4rem;
 }
 
 .application-title > div {
@@ -110,20 +111,28 @@ body {
   justify-content: space-between;
 }
 
+.input-items {
+  display: flex;
+  flex-direction: column;
+}
+
 .input-items > input {
   padding: 3px;
   margin-left: 5px;
+  width: 19rem;
 }
 
 .btn {
-  padding: 8px;
-  border-radius: 15px;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
   background-color: #2563eb;
   color: white;
   border: none;
   cursor: pointer;
-  width: 8rem;
-  height: 2rem;
+  width: 100%;
+  height: 3rem;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .btn-container {
@@ -144,20 +153,18 @@ body {
 }
 
 .list {
-  display: flex;
-  padding: 0;
-  border: 0.5px solid slategrey;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr auto;
+  padding: 1rem;
+  border: 0.5px solid rgba(112, 128, 144, 0.4);
   border-radius: 10px;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .list-items {
-  display: flex;
   list-style: none;
-  margin: 0.5rem;
-  justify-content: space-between;
-
+  overflow: hidden;
   padding: 0.5rem;
 }
 
@@ -322,6 +329,7 @@ a {
 }
 .count-items > p {
   margin: 1rem;
+  color: slategray;
 }
 
 .count-container {
@@ -368,7 +376,11 @@ a {
 }
 
 #email,
-#password {
+#password,
+#salary,
+#company,
+#jobTitle,
+#AppliedAt {
   padding: 8px 12px;
   height: 26px;
   margin-top: 0.5rem;
@@ -513,4 +525,8 @@ a {
   margin-top: 0.25rem;
   display: block;
   font-weight: 500;
+}
+
+input::placeholder {
+  font-size: 16px;
 }

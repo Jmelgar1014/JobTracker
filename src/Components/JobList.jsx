@@ -12,6 +12,7 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
                 <li className="list-items">{item.company}</li>
                 <li className="list-items">{item.jobTitle}</li>
                 <li className="list-items">${item.salary}</li>
+                <li className="list-items">{item.appliedAt.slice(0, 10)}</li>
                 <li className="list-items">
                   <DropDown
                     status={item.status}
@@ -20,7 +21,6 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
                     }
                   />
                 </li>
-                <li className="list-items">{item.appliedAt}</li>
                 <li className="list-items">
                   <button
                     key={item.id}

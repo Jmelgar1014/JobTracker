@@ -17,6 +17,7 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData, errors }) => {
                   type="text"
                   id="company"
                   name="company"
+                  placeholder="e.g. Google, Microsoft, Startup Inc."
                   onChange={handleChange}
                   value={formData.company}
                   className={errors.company ? "input-errors" : ""}
@@ -31,6 +32,7 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData, errors }) => {
                   type="text"
                   id="jobTitle"
                   name="jobTitle"
+                  placeholder="e.g. Software Engineer, Product Manager"
                   onChange={handleChange}
                   value={formData.jobTitle}
                   className={errors.jobTitle ? "input-errors" : ""}
@@ -47,6 +49,7 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData, errors }) => {
                   type="number"
                   id="salary"
                   name="salary"
+                  placeholder="e.g. $80,000 - $120,000"
                   onChange={handleChange}
                   value={formData.salary}
                   className={errors.salary ? "input-errors" : ""}

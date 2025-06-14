@@ -113,8 +113,6 @@ export const JobProvider = ({ children }) => {
 
   const deleteJob = useMutation({
     mutationFn: async (itemId) => {
-      //console.log("I have been pressed");
-      //setLoading(true);
       await fetch(
         `https://jobtrackerapi.fly.dev/api/jobapplication/${itemId}`,
         {
