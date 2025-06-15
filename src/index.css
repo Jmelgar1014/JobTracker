@@ -63,6 +63,7 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 4rem;
+  margin-bottom: 2rem;
 }
 
 .application-title > div {
@@ -154,12 +155,16 @@ body {
 
 .list {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr auto;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr auto;
   padding: 1rem;
   border: 0.5px solid rgba(112, 128, 144, 0.4);
   border-radius: 10px;
   align-items: center;
   gap: 0.5rem;
+}
+
+.list:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .list-items {

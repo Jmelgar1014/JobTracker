@@ -5,7 +5,6 @@ import SignUp from "../Components/SignUp";
 const SignUpPage = () => {
   return (
     <>
-      <LoginNavBar />
       <SignUp />÷
     </>
   );

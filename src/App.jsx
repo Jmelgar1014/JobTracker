@@ -15,39 +15,55 @@ import SignUpPage from "./Pages/SignUpPage";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import { AuthProvider } from "./Context/AuthContext";
 import { JobProvider } from "./Context/JobContext";
+import MainLayout from "./Layouts/MainLayout";
+import LoginLayout from "./Layouts/LoginLayout";
+import StatsPage from "./Pages/StatsPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route index element={<LoginPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/" element={<LoginLayout />}>
+        <Route index element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route
+            path="/verify"
+            element={
+              <Suspense fallback={<Spinner />}>
+                <VerifyPage />
+              </Suspense>
+            }
+          />
+        </Route>
+      </Route>
       <Route element={<ProtectedRoutes />}>
-        <Route
-          path="/home"
-          element={
-            <Suspense fallback={<Spinner />}>
-              <HomePage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/applications"
-          element={
-            <Suspense fallback={<Spinner />}>
-              <ApplicationsPage />
-            </Suspense>
-          }
-        />
-
-        <Route
-          path="/verify"
-          element={
-            <Suspense fallback={<Spinner />}>
-              <VerifyPage />
-            </Suspense>
-          }
-        />
+        <Route element={<MainLayout />}>
+          <Route
+            path="/home"
+            element={
+              <Suspense fallback={<Spinner />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/applications"
+            element={
+              <Suspense fallback={<Spinner />}>
+                <ApplicationsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/stats"
+            element={
+              <Suspense fallback={<Spinner />}>
+                <StatsPage />
+              </Suspense>
+            }
+          />
+        </Route>
       </Route>
     </>
   )

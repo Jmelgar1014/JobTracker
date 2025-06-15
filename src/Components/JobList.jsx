@@ -9,6 +9,11 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
           {jobs.map((item, index) => {
             return (
               <ul key={index} className="list ">
+                <li className="list-items">
+                  <div className="verify-steps-num">
+                    <span>{index + 1}</span>
+                  </div>
+                </li>
                 <li className="list-items">{item.company}</li>
                 <li className="list-items">{item.jobTitle}</li>
                 <li className="list-items">${item.salary}</li>

@@ -23,7 +23,6 @@ const HomePage = () => {
 
   return (
     <>
-      <NavBar />
       <ApplicationTitle />
       <ApplicationForm
         handleChange={handleChange}

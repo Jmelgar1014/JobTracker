@@ -24,6 +24,11 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li id="nav-items">
+            <NavLink to="/stats" className={linkClass}>
+              Stats
+            </NavLink>
+          </li>
+          <li id="nav-items">
             <SignOut />
           </li>
         </ul>

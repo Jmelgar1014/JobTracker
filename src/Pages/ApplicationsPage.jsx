@@ -10,7 +10,6 @@ const ApplicationsPage = () => {
   const { loading, jobs, deleteJob, handleStatusChange } = useJob();
   return (
     <>
-      <NavBar />
       <TotalCounts count={jobs} />
       {loading ? (
         <Spinner />
