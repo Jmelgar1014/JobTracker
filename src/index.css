@@ -535,3 +535,9 @@ a {
 input::placeholder {
   font-size: 16px;
 }
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 32px;
+}

@@ -18,12 +18,15 @@ const StatsPage = () => {
     (jobs.filter((item) => item.status == "rejected").length / jobs.length) *
     100;
 
+  const noResponseRate =
+    (jobs.filter((item) => item.status == "applied").length / jobs.length) *
+    100;
   return (
     <>
       <DashboardTitle />
       <TotalCounts count={jobs} />
       <div className="count-container">
-        <div className="counts">
+        <div className="dashboard-container">
           <Stat
             percentageName="Interview Rate"
             percentage={interviewPercentage.toFixed(0)}
@@ -35,6 +38,10 @@ const StatsPage = () => {
           <Stat
             percentageName="Rejected Rate"
             percentage={rejectPercentage.toFixed(0)}
+          />
+          <Stat
+            percentageName="No Response Rate"
+            percentage={noResponseRate.toFixed(0)}
           />
         </div>
       </div>
