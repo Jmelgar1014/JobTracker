@@ -6,7 +6,7 @@ import JobList from "../Components/JobList";
 import EmptyList from "../Components/EmptyList";
 import Spinner from "../Components/Spinner";
 import TotalCounts from "../Components/TotalCounts";
-import { useJob } from "../Context/JobContext";
+import { useJob } from "../Hooks/useJob";
 
 const HomePage = () => {
   const {

@@ -1,7 +1,7 @@
 import React from "react";
 import DashboardTitle from "../Components/DashboardTitle";
 import TotalCounts from "../Components/TotalCounts";
-import { useJob } from "../Context/JobContext";
+import { useJob } from "../Hooks/useJob";
 import Stat from "../Components/Stat";
 import PendingIcon from "../Components/PendingIcon";
 import OffierIcon from "../Components/OffierIcon";
