@@ -3,6 +3,10 @@ import DashboardTitle from "../Components/DashboardTitle";
 import TotalCounts from "../Components/TotalCounts";
 import { useJob } from "../Context/JobContext";
 import Stat from "../Components/Stat";
+import PendingIcon from "../Components/PendingIcon";
+import OffierIcon from "../Components/OffierIcon";
+import InterviewIcon from "../Components/InterviewIcon";
+import AppIcon from "../Components/AppIcon";
 
 const StatsPage = () => {
   const { jobs } = useJob();
@@ -19,30 +23,42 @@ const StatsPage = () => {
     100;
 
   const noResponseRate =
-    (jobs.filter((item) => item.status == "applied").length / jobs.length) *
+    (jobs.filter((item) => item.status == "Applied").length / jobs.length) *
     100;
+
   return (
     <>
       <DashboardTitle />
-      <TotalCounts count={jobs} />
       <div className="count-container">
         <div className="dashboard-container">
           <Stat
-            percentageName="Interview Rate"
-            percentage={interviewPercentage.toFixed(0)}
-          />
+            statDesc="All submitted job applications"
+            jobs={jobs.length}
+            statName="Total Applications"
+          >
+            <AppIcon />
+          </Stat>
           <Stat
-            percentageName="Offer Rate"
-            percentage={offerPercentage.toFixed(0)}
-          />
+            jobs={jobs.filter((item) => item.status == "interview").length}
+            statName="Interviews"
+            statDesc="Applications that led to interviews"
+          >
+            <InterviewIcon />
+          </Stat>
           <Stat
-            percentageName="Rejected Rate"
-            percentage={rejectPercentage.toFixed(0)}
-          />
+            jobs={jobs.filter((item) => item.status == "offer").length}
+            statName="Offers"
+            statDesc="Applications that results in job offers"
+          >
+            <OffierIcon />
+          </Stat>
           <Stat
-            percentageName="No Response Rate"
-            percentage={noResponseRate.toFixed(0)}
-          />
+            jobs={jobs.filter((item) => item.status == "Applied").length}
+            statName="Pending"
+            statDesc="Applications awaiting response"
+          >
+            <PendingIcon />
+          </Stat>
         </div>
       </div>
     </>

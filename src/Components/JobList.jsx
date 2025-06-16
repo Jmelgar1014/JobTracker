@@ -26,6 +26,7 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
                     }
                   />
                 </li>
+
                 <li className="list-items">
                   <button
                     key={item.id}
