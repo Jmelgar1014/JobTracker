@@ -576,6 +576,8 @@ input::placeholder {
   font-size: 24px;
   font-weight: 600;
   color: #2563eb;
+  display: flex;
+  align-items: center;
 }
 
 .stat-icons {
