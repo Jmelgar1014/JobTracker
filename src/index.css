@@ -536,7 +536,7 @@ input::placeholder {
 .dashboard-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 32px;
+  grid-gap: 4rem;
   margin-bottom: 4rem;
 }
 
@@ -622,4 +622,70 @@ input::placeholder {
 
 .pending-icon {
   color: rgb(71 85 105 / var(--tw-text-opacity, 1));
+}
+
+.metric-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.metrics {
+  width: 53rem;
+  margin-bottom: 2rem;
+}
+
+.percent-container {
+  display: flex;
+  flex-direction: column;
+  height: 14rem;
+  width: 14rem;
+  justify-content: center;
+  align-items: center;
+}
+.percent > h4,
+p {
+  margin: 0;
+}
+
+.percent > p {
+  color: slategray;
+}
+
+.percent > h4 {
+  font-size: 30px;
+  padding-bottom: 0.5rem;
+}
+.percent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 9rem;
+  width: 9rem;
+}
+
+.percent-text > p {
+  color: slategray;
+}
+
+.percent-text {
+  text-align: center;
+}
+
+.metric-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.interview-percent {
+  color: #d97706;
+}
+
+.offer-percent {
+  color: #16a34a;
+}
+
+.success-percent {
+  color: #2563eb;
 }

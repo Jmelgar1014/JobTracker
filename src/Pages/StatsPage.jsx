@@ -1,12 +1,15 @@
 import React from "react";
 import DashboardTitle from "../Components/DashboardTitle";
-import TotalCounts from "../Components/TotalCounts";
 import { useJob } from "../Hooks/useJob";
 import Stat from "../Components/Stat";
 import PendingIcon from "../Components/PendingIcon";
 import OffierIcon from "../Components/OffierIcon";
 import InterviewIcon from "../Components/InterviewIcon";
 import AppIcon from "../Components/AppIcon";
+import Metrics from "../Components/Metrics";
+import InterviewPercentage from "../Components/InterviewPercentage";
+import OfferPercentage from "../Components/OfferPercentage";
+import SuccessPercentage from "../Components/SuccessPercentage";
 
 const StatsPage = () => {
   const { jobs } = useJob();
@@ -14,17 +17,26 @@ const StatsPage = () => {
   const interviewPercentage =
     (jobs.filter((item) => item.status == "interview").length / jobs.length) *
     100;
+  const interviewCount = jobs.filter(
+    (item) => item.status == "interview"
+  ).length;
 
   const offerPercentage =
     (jobs.filter((item) => item.status == "offer").length / jobs.length) * 100;
 
-  const rejectPercentage =
-    (jobs.filter((item) => item.status == "rejected").length / jobs.length) *
-    100;
+  const offerCount = jobs.filter((item) => item.status == "offer").length;
 
-  const noResponseRate =
-    (jobs.filter((item) => item.status == "Applied").length / jobs.length) *
-    100;
+  // const rejectPercentage =
+  //   (jobs.filter((item) => item.status == "rejected").length / jobs.length) *
+  //   100;
+
+  // const noResponseRate =
+  //   (jobs.filter((item) => item.status == "Applied").length / jobs.length) *
+  //   100;
+
+  const successPercentage = interviewPercentage + offerPercentage;
+
+  const successCount = interviewCount + offerCount;
 
   return (
     <>
@@ -61,6 +73,23 @@ const StatsPage = () => {
           </Stat>
         </div>
       </div>
+      <Metrics>
+        <InterviewPercentage
+          percentage={interviewPercentage.toFixed(1)}
+          count={interviewCount}
+          jobs={jobs.length}
+        />
+        <OfferPercentage
+          percentage={offerPercentage.toFixed(1)}
+          count={offerCount}
+          jobs={jobs.length}
+        />
+        <SuccessPercentage
+          percentage={successPercentage.toFixed(1)}
+          count={successCount}
+          jobs={jobs.length}
+        />
+      </Metrics>
     </>
   );
 };
