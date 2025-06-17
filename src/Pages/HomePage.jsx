@@ -5,7 +5,7 @@ import ApplicationForm from "../Components/ApplicationForm";
 import JobList from "../Components/JobList";
 import EmptyList from "../Components/EmptyList";
 import Spinner from "../Components/Spinner";
-import TotalCounts from "../Components/TotalCounts";
+import MinimalCount from "../Components/MinimalCount";
 import { useJob } from "../Hooks/useJob";
 
 const HomePage = () => {
@@ -30,7 +30,7 @@ const HomePage = () => {
         formData={formData}
         errors={errors}
       />
-      <TotalCounts count={jobs} />
+      <MinimalCount count={jobs} />
       {loading ? (
         <Spinner />
       ) : jobs.length > 0 ? (

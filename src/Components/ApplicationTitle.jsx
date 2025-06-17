@@ -5,8 +5,8 @@ export const ApplicationTitle = () => {
     <>
       <section className="application-title">
         <div>
-          <h1>Track Your Job Applications</h1>
-          <p>
+          <h1 className="title">Track Your Job Applications</h1>
+          <p className="title-desc">
             Stay organized and never lose track of your job search progress. Add
             new applications below.
           </p>

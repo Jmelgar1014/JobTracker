@@ -5,11 +5,13 @@ import EmptyList from "../Components/EmptyList";
 import Spinner from "../Components/Spinner";
 import TotalCounts from "../Components/TotalCounts";
 import { useJob } from "../Hooks/useJob";
+import TotalCountTitle from "../Components/TotalCountTitle";
 
 const ApplicationsPage = () => {
   const { loading, jobs, deleteJob, handleStatusChange } = useJob();
   return (
     <>
+      <TotalCountTitle />
       <TotalCounts count={jobs} />
       {loading ? (
         <Spinner />

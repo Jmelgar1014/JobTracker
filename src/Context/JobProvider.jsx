@@ -102,7 +102,7 @@ export const JobProvider = ({ children }) => {
       jobTitle: "",
       salary: "",
       AppliedAt: "",
-      status: "Applied",
+      status: "applied",
     });
   };
 

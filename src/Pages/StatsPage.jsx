@@ -31,7 +31,7 @@ const StatsPage = () => {
   //   100;
 
   // const noResponseRate =
-  //   (jobs.filter((item) => item.status == "Applied").length / jobs.length) *
+  //   (jobs.filter((item) => item.status == "applied").length / jobs.length) *
   //   100;
 
   const successPercentage = interviewPercentage + offerPercentage;
@@ -65,7 +65,7 @@ const StatsPage = () => {
             <OffierIcon />
           </Stat>
           <Stat
-            jobs={jobs.filter((item) => item.status == "Applied").length}
+            jobs={jobs.filter((item) => item.status == "applied").length}
             statName="Pending"
             statDesc="Applications awaiting response"
           >

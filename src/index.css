@@ -62,7 +62,7 @@ body {
 .application-title {
   display: flex;
   justify-content: center;
-  margin-top: 4rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -361,6 +361,28 @@ a {
   align-items: center;
 }
 
+.total-counts {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  width: 53rem;
+  padding: 2rem;
+  justify-content: space-between;
+  grid-gap: 32px;
+}
+
+.total-count-items {
+  padding: 1rem;
+  width: 7rem;
+  height: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.total-count-items > p {
+  font-size: 12px;
+  color: slategray;
+  padding-top: 5px;
+}
 .interview-count {
   color: #d97706;
 }
@@ -688,4 +710,23 @@ p {
 
 .success-percent {
   color: #2563eb;
+}
+
+.title {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.title-desc {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: slategray;
+}
+
+.applied-count {
+  color: #2563eb;
+}
+
+.rejected-count {
+  color: #e74c3c;
 }
