@@ -4,20 +4,30 @@ import supabase from "../../supaBaseData";
 
 const NewPassword = () => {
   const [password, setPassword] = useState("");
+
   useEffect(() => {
-    supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event == "PASSWORD_RECOVERY") {
-        const newPassword = prompt(
-          "What would you like your new password to be?"
-        );
-        const { data, error } = await supabase.auth.updateUser({
-          password: newPassword,
-        });
-        if (data) alert("Password updated successfully!");
-        if (error) alert("There was an error updating your password.");
+    const exchange = async () => {
+      const { error } = await supabase.auth.exchangeCodeForSession(
+        window.location.href
+      );
+      if (error) {
+        console.error("Session exchange failed");
       }
-    });
+    };
+
+    exchange();
   }, []);
+
+  const handlePassword = async () => {
+    const { data, error } = await supabase.auth.updateUser({ password });
+
+    if (error) {
+      alert("There was an error updating your password");
+    } else {
+      alert("Your password has been successfully updated");
+    }
+  };
+
   return (
     <>
       <div className="verify-page-container">
@@ -49,7 +59,7 @@ const NewPassword = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button className="btn" id="reset-btn">
+            <button className="btn" id="reset-btn" onClick={handlePassword}>
               Reset Password
             </button>
           </div>
