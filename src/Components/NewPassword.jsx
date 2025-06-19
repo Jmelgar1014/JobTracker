@@ -56,7 +56,7 @@ const NewPassword = () => {
               Password
             </label>
             <input
-              type="text"
+              type="password"
               name="password"
               id="password"
               value={password}
