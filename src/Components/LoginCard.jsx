@@ -25,6 +25,10 @@ const LoginCard = () => {
     }
   }
 
+  const forgotPasswordRedirect = () => {
+    navigate("/resetpassword");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signIn(email, password);
@@ -83,7 +87,9 @@ const LoginCard = () => {
                 />
               </div>
               <div className="forgot-password">
-                <button>Forgot your password?</button>
+                <button type="button" onClick={forgotPasswordRedirect}>
+                  Forgot your password?
+                </button>
               </div>
               <button type="submit" className="login-btn">
                 Sign In

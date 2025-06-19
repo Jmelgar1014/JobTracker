@@ -18,6 +18,8 @@ import { JobProvider } from "./Context/JobProvider";
 import MainLayout from "./Layouts/MainLayout";
 import LoginLayout from "./Layouts/LoginLayout";
 import StatsPage from "./Pages/StatsPage";
+import ResetPasswordPage from "./Pages/ResetPasswordPage";
+import NewPasswordPage from "./Pages/NewPasswordPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +28,8 @@ const router = createBrowserRouter(
         <Route index element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/resetpassword" element={<ResetPasswordPage />} />
+        <Route path="/newpassword" element={<NewPasswordPage />} />
         <Route element={<ProtectedRoutes />}>
           <Route
             path="/verify"

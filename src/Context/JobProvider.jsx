@@ -106,7 +106,7 @@ export const JobProvider = ({ children }) => {
     });
   };
 
-  const handleStatusChange = async (index, newStatus, itemId) => {
+  const handleStatusChange = async (newStatus, itemId) => {
     await updateJobStatus.mutateAsync({ id: itemId, status: newStatus });
   };
 

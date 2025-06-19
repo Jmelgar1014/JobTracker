@@ -22,7 +22,7 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
                   <DropDown
                     status={item.status}
                     onChange={(e) =>
-                      handleStatusChange(index, e.target.value, item.id)
+                      handleStatusChange(e.target.value, item.id)
                     }
                   />
                 </li>
