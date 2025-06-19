@@ -13,7 +13,7 @@ const SignOut = () => {
   }
   return (
     <div>
-      <a className="" onClick={signOut}>
+      <a onClick={signOut} className="navbar-list-items">
         Sign out
       </a>
     </div>
