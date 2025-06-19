@@ -1,8 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import supabase from "../../supaBaseData";
+import { useNavigate } from "react-router-dom";
 
 const NewPassword = () => {
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
 
   useEffect(() => {
@@ -25,6 +27,7 @@ const NewPassword = () => {
       alert("There was an error updating your password");
     } else {
       alert("Your password has been successfully updated");
+      navigate("/login");
     }
   };
 
