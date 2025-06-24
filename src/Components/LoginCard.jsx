@@ -10,6 +10,7 @@ const LoginCard = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [incorrectPass, setIncorrectPass] = useState(false);
 
   async function signIn(email, password) {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -17,10 +18,12 @@ const LoginCard = () => {
       password: password,
     });
     if (data.session) {
+      setIncorrectPass(false);
       navigate("/home");
     }
 
     if (error) {
+      setIncorrectPass(true);
       console.log(error);
     }
   }
@@ -80,11 +83,14 @@ const LoginCard = () => {
                 <input
                   type="password"
                   name="password"
-                  id="password"
+                  id={incorrectPass ? "incorrectPass" : "password"}
                   value={password}
                   placeholder="Enter your password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                {incorrectPass && (
+                  <span className="incorrectPass">Incorrect Password</span>
+                )}
               </div>
               <div className="forgot-password">
                 <button type="button" onClick={forgotPasswordRedirect}>

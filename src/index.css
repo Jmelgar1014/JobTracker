@@ -412,6 +412,22 @@ a {
   border: 1px solid rgb(228, 228, 231);
 }
 
+#incorrectPass {
+  padding: 8px 12px;
+  height: 26px;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  border: 2px solid rgb(212, 17, 13);
+}
+
+.incorrectPass {
+  color: #991b1b;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 2px;
+  margin: 5px;
+}
+
 #email::placeholder,
 #password::placeholder {
   font-size: 14px;
