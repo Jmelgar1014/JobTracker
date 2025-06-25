@@ -839,6 +839,42 @@ input::placeholder {
   margin-top: 2rem;
 }
 
+.hamburger-menu {
+  margin: 0 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.hamburger-menu:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+
+.mobileNav-container {
+  position: fixed;
+  top: 5rem;
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: top 0;
+  padding: 0;
+}
+
+.mobileNav > li {
+  justify-content: center;
+  margin: 1rem;
+  list-style: none;
+}
+.mobileNav > li > a:visited {
+  color: black;
+}
+
 @media (min-width: 340px) and (max-width: 900px) {
   .input-container {
     flex-direction: column;
@@ -886,6 +922,12 @@ input::placeholder {
     place-items: center;
     margin: 0 1rem 2rem 1rem;
   }
+  .navbar-list {
+    display: none;
+  }
+  .navbar > ul {
+    display: none;
+  }
 }
 
 @media (min-width: 481px) and (max-width: 715px) {
@@ -901,6 +943,13 @@ input::placeholder {
     place-items: center;
     margin: 0 1rem 2rem 1rem;
   }
+
+  .navbar-list {
+    display: none;
+  }
+  .navbar > ul {
+    display: none;
+  }
 }
 
 @media (min-width: 481px) and (max-width: 715px) {
@@ -912,5 +961,11 @@ input::placeholder {
 @media (min-width: 716px) and (max-width: 900px) {
   .total-counts {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 716px) {
+  .hamburger-menu {
+    display: none;
   }
 }
