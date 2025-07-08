@@ -38,7 +38,7 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData, errors }) => {
                   className={errors.jobTitle ? "input-errors" : ""}
                 />
                 {errors.jobTitle && (
-                  <span className="error-message">Company is required </span>
+                  <span className="error-message">Job Title is required </span>
                 )}
               </div>
             </div>
@@ -55,7 +55,7 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData, errors }) => {
                   className={errors.salary ? "input-errors" : ""}
                 />
                 {errors.salary && (
-                  <span className="error-message">Company is required </span>
+                  <span className="error-message">Salary is required </span>
                 )}
               </div>
               <div className="input-items">
@@ -69,7 +69,7 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData, errors }) => {
                   className={errors.AppliedAt ? "input-errors" : ""}
                 />
                 {errors.AppliedAt && (
-                  <span className="error-message">Company is required </span>
+                  <span className="error-message">Date is required </span>
                 )}
               </div>
             </div>
