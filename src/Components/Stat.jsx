@@ -3,17 +3,15 @@ import React from "react";
 const Stat = ({ statDesc, jobs, statName, children }) => {
   return (
     <>
-      <div className="stat-items count-shadows ">
-        <div className="stat-container">
-          {children}
-          <div className="stat-num">{jobs}</div>
+      <div className="jt-panel jt-card">
+        <div className="jt-card-top">
+          <span className="jt-card-label">{statName}</span>
+          <span className="jt-card-ico" aria-hidden="true">
+            {children}
+          </span>
         </div>
-        <div className="stat-desc">
-          <h3>{statName}</h3>
-        </div>
-        <div className="stat-desc">
-          <p>{statDesc}</p>
-        </div>
+        <div className="jt-card-value">{jobs}</div>
+        <p className="jt-card-note">{statDesc}</p>
       </div>
     </>
   );

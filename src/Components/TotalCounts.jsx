@@ -7,38 +7,50 @@ const TotalCounts = ({ count }) => {
   return (
     <>
       <div className="count-container">
-        <div className="total-counts">
-          <div className="total-count-items count-shadows">
-            <h2 className="total-applications application-count">
-              {count.length}
-            </h2>
-            <p>Total Applications</p>
+        <section className="jt-panel jt-summary" aria-label="Summary">
+          <div className="jt-stats jt-stats-5">
+            <div className="jt-stat">
+              <span className="jt-stat-label">Total Applications</span>
+              <span className="jt-stat-value">{count.length}</span>
+            </div>
+            <div className="jt-stat">
+              <span className="jt-stat-label">
+                <i className="jt-dot jt-dot-applied" />
+                Applied
+              </span>
+              <span className="jt-stat-value">
+                {count.filter((item) => item.status == "applied").length}
+              </span>
+            </div>
+            <div className="jt-stat">
+              <span className="jt-stat-label">
+                <i className="jt-dot jt-dot-interview" />
+                Interviews
+              </span>
+              <span className="jt-stat-value">
+                {count.filter((item) => item.status == "interview").length}
+              </span>
+            </div>
+            <div className="jt-stat">
+              <span className="jt-stat-label">
+                <i className="jt-dot jt-dot-offer" />
+                Offers
+              </span>
+              <span className="jt-stat-value">
+                {count.filter((item) => item.status == "offer").length}
+              </span>
+            </div>
+            <div className="jt-stat">
+              <span className="jt-stat-label">
+                <i className="jt-dot jt-dot-rejected" />
+                Rejected
+              </span>
+              <span className="jt-stat-value">
+                {count.filter((item) => item.status == "rejected").length}
+              </span>
+            </div>
           </div>
-          <div className="total-count-items count-shadows">
-            <h2 className="total-applications applied-count">
-              {count.filter((item) => item.status == "applied").length}
-            </h2>
-            <p>Applied</p>
-          </div>
-          <div className="total-count-items count-shadows">
-            <h2 className="total-applications interview-count">
-              {count.filter((item) => item.status == "interview").length}
-            </h2>
-            <p>Interviews</p>
-          </div>
-          <div className="total-count-items count-shadows">
-            <h2 className="total-applications offer-count">
-              {count.filter((item) => item.status == "offer").length}
-            </h2>
-            <p>Offers</p>
-          </div>
-          <div className="total-count-items count-shadows">
-            <h2 className="total-applications rejected-count">
-              {count.filter((item) => item.status == "rejected").length}
-            </h2>
-            <p>Rejected</p>
-          </div>
-        </div>
+        </section>
       </div>
     </>
   );

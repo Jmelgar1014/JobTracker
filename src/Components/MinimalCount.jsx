@@ -4,27 +4,33 @@ const MinimalCount = ({ count }) => {
   return (
     <>
       <div className="count-container">
-        <div className="counts">
-          <div className="count-items count-shadows">
-            <h2 className="total-applications application-count">
-              {count.length}
-            </h2>
-            <p>Total Applications</p>
-          </div>
+        <section className="jt-panel jt-summary" aria-label="Summary">
+          <div className="jt-stats">
+            <div className="jt-stat">
+              <span className="jt-stat-label">Total Applications</span>
+              <span className="jt-stat-value">{count.length}</span>
+            </div>
 
-          <div className="count-items count-shadows">
-            <h2 className="total-applications interview-count">
-              {count.filter((item) => item.status == "interview").length}
-            </h2>
-            <p>Interviews</p>
+            <div className="jt-stat">
+              <span className="jt-stat-label">
+                <i className="jt-dot jt-dot-interview" />
+                Interviews
+              </span>
+              <span className="jt-stat-value">
+                {count.filter((item) => item.status == "interview").length}
+              </span>
+            </div>
+            <div className="jt-stat">
+              <span className="jt-stat-label">
+                <i className="jt-dot jt-dot-offer" />
+                Offers
+              </span>
+              <span className="jt-stat-value">
+                {count.filter((item) => item.status == "offer").length}
+              </span>
+            </div>
           </div>
-          <div className="count-items count-shadows">
-            <h2 className="total-applications offer-count">
-              {count.filter((item) => item.status == "offer").length}
-            </h2>
-            <p>Offers</p>
-          </div>
-        </div>
+        </section>
       </div>
     </>
   );

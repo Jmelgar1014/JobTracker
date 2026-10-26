@@ -14,15 +14,17 @@ import SuccessPercentage from "../Components/SuccessPercentage";
 const StatsPage = () => {
   const { jobs } = useJob();
 
-  const interviewPercentage =
-    (jobs.filter((item) => item.status == "interview").length / jobs.length) *
-    100;
+  const interviewPercentage = jobs.length
+    ? (jobs.filter((item) => item.status == "interview").length / jobs.length) *
+      100
+    : 0;
   const interviewCount = jobs.filter(
-    (item) => item.status == "interview"
+    (item) => item.status == "interview",
   ).length;
 
-  const offerPercentage =
-    (jobs.filter((item) => item.status == "offer").length / jobs.length) * 100;
+  const offerPercentage = jobs.length
+    ? (jobs.filter((item) => item.status == "offer").length / jobs.length) * 100
+    : 0;
 
   const offerCount = jobs.filter((item) => item.status == "offer").length;
 
@@ -42,7 +44,7 @@ const StatsPage = () => {
     <>
       <DashboardTitle />
       <div className="count-container">
-        <div className="dashboard-container">
+        <div className="jt-cards">
           <Stat
             statDesc="All submitted job applications"
             jobs={jobs.length}

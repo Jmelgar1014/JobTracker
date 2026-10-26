@@ -3,7 +3,15 @@ import { useAuth } from "../Hooks/useAuth";
 import { JobContext } from "./JobContext";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
+const API_URL = import.meta.env.VITE_API_URL ?? "https://jobtrackerapi.fly.dev";
 export const JobProvider = ({ children }) => {
+  const today = () => {
+    const d = new Date();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+
+    return `${d.getFullYear()}-${month}-${day}`;
+  };
   const { token, user } = useAuth();
   const queryClient = useQueryClient();
   const [errors, setErrors] = useState({});
@@ -11,7 +19,7 @@ export const JobProvider = ({ children }) => {
     company: "",
     jobTitle: "",
     salary: "",
-    AppliedAt: "",
+    AppliedAt: today(),
     status: "applied",
     userId: "",
   });
@@ -19,14 +27,11 @@ export const JobProvider = ({ children }) => {
   const { data: jobs = [], isLoading: loading } = useQuery({
     queryKey: ["jobs"],
     queryFn: async () => {
-      const response = await fetch(
-        "https://jobtrackerapi.fly.dev/api/jobapplication",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/jobapplication`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return response.json();
     },
     enabled: !!token,
@@ -50,7 +55,7 @@ export const JobProvider = ({ children }) => {
 
   const updateJobStatus = useMutation({
     mutationFn: async ({ id, status }) =>
-      fetch(`https://jobtrackerapi.fly.dev/api/jobapplication/${id}`, {
+      fetch(`${API_URL}/api/jobapplication/${id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -78,7 +83,7 @@ export const JobProvider = ({ children }) => {
 
   const addJob = useMutation({
     mutationFn: async (newJob) => {
-      await fetch("https://jobtrackerapi.fly.dev/api/jobapplication", {
+      await fetch(`${API_URL}/api/jobapplication`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -101,7 +106,7 @@ export const JobProvider = ({ children }) => {
       company: "",
       jobTitle: "",
       salary: "",
-      AppliedAt: "",
+      AppliedAt: today(),
       status: "applied",
     });
   };
@@ -112,15 +117,12 @@ export const JobProvider = ({ children }) => {
 
   const deleteJob = useMutation({
     mutationFn: async (itemId) => {
-      await fetch(
-        `https://jobtrackerapi.fly.dev/api/jobapplication/${itemId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await fetch(`${API_URL}/api/jobapplication/${itemId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     },
     onSuccess: () => queryClient.invalidateQueries(["jobs"]),
   });
