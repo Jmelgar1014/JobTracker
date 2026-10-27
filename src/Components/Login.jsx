@@ -5,9 +5,14 @@ import LoginCard from "./LoginCard";
 const Login = () => {
   return (
     <>
-      <div className="login-container">
-        <LoginTitle />
-        <LoginCard />
+      <div className="jt-auth-page">
+        <div className="jt-auth">
+          <LoginTitle />
+          <LoginCard />
+          <p className="jt-auth-legal">
+            Your applications are private to your account.
+          </p>
+        </div>
       </div>
     </>
   );

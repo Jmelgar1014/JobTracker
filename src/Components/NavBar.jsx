@@ -28,44 +28,55 @@ const NavBar = () => {
     setMobile((prev) => !prev);
   };
   const linkClass = ({ isActive }) =>
-    isActive ? "navbar-list-items-active" : "navbar-list-items";
+    isActive ? "jt-nav-link jt-nav-link-active" : "jt-nav-link";
   return (
     <>
-      <nav className="navbar">
-        <span className="navbar-logo">
-          <h1 className="navbar-title">Job Tracker</h1>
+      <nav className="jt-nav">
+        <span className="jt-brand">
+          <span className="jt-brand-mark" aria-hidden="true">
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinejoin="round"
+            >
+              <rect x="2" y="4.5" width="12" height="9" rx="1.5" />
+              <path d="M6 4.5V3h4v1.5M2 8.5h12" />
+            </svg>
+          </span>
+          <h1 className="jt-brand-name">Job Tracker</h1>
         </span>
-        <div className="hamburger-menu" onClick={handeMobile}>
+        <div className="jt-menu-btn" onClick={handeMobile}>
           <svg
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+            aria-hidden="true"
           >
-            <path
-              fill="currentColor"
-              d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"
-            />
+            <path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" />
           </svg>
         </div>
         {mobile && <MobileNav onClick={mobileSelect} />}
-        <ul className="navbar-list">
-          <li className="" id="nav-items">
+        <ul className="jt-nav-links">
+          <li>
             <NavLink to="/home" className={linkClass}>
               Home
             </NavLink>
           </li>
-          <li className="" id="nav-items">
+          <li>
             <NavLink to="/applications" className={linkClass}>
               Applications
             </NavLink>
           </li>
-          <li id="nav-items">
+          <li>
             <NavLink to="/stats" className={linkClass}>
               Stats
             </NavLink>
           </li>
-          <li id="nav-items">
+          <li className="jt-nav-right">
             <SignOut />
           </li>
         </ul>

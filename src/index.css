@@ -1772,3 +1772,471 @@ input::placeholder {
     grid-template-columns: 1fr;
   }
 }
+
+/* Top navigation (NavBar, MobileNav, SignOut) */
+.jt-nav {
+  --jt-surface: #ffffff;
+  --jt-surface-2: #f0f2f5;
+  --jt-line: #e3e6eb;
+  --jt-line-strong: #cfd4dc;
+  --jt-fg: #151a23;
+  --jt-fg-2: #4a5363;
+  --jt-accent: #2f4fd8;
+  --jt-accent-soft: #e9edfd;
+
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  box-sizing: border-box;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  /* keeps the content lined up with the 65rem panels below */
+  padding: 0 max(16px, calc((100% - 65rem) / 2));
+  background: var(--jt-surface);
+  border-bottom: 1px solid var(--jt-line);
+}
+
+.jt-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+}
+
+.jt-brand-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  background: var(--jt-accent);
+  color: #ffffff;
+}
+
+.jt-brand-mark svg {
+  width: 16px;
+  height: 16px;
+}
+
+.jt-brand-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--jt-fg);
+}
+
+.jt-nav-links {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jt-nav-links > li {
+  display: flex;
+}
+
+.jt-nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--jt-fg-2);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.jt-nav-link:visited {
+  color: var(--jt-fg-2);
+}
+
+.jt-nav-link:hover {
+  color: var(--jt-fg);
+}
+
+.jt-nav-link-active,
+.jt-nav-link-active:visited {
+  color: var(--jt-fg);
+  font-weight: 600;
+}
+
+.jt-nav-link-active::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -1px;
+  height: 2px;
+  background: var(--jt-accent);
+  border-radius: 2px 2px 0 0;
+}
+
+.jt-nav-right {
+  margin-left: auto;
+  align-items: center;
+}
+
+.jt-signout,
+.jt-menu-btn {
+  box-sizing: border-box;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--jt-fg-2);
+  background: transparent;
+  border: 1px solid var(--jt-line-strong);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.jt-signout:hover,
+.jt-menu-btn:hover {
+  background: var(--jt-surface-2);
+  color: var(--jt-fg);
+}
+
+.jt-signout svg,
+.jt-menu-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.jt-menu-btn {
+  display: none;
+  width: 34px;
+  padding: 0;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.jt-nav-link:focus-visible,
+.jt-signout:focus-visible,
+.jt-mobile-list a:focus-visible {
+  outline: 2px solid var(--jt-accent);
+  outline-offset: 2px;
+}
+
+/* Mobile dropdown, shown by NavBar's `mobile` state */
+.jt-mobile-nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 8px 16px 12px;
+  background: var(--jt-surface);
+  border-bottom: 1px solid var(--jt-line);
+  box-shadow: 0 8px 16px rgba(21, 26, 35, 0.06);
+}
+
+.jt-mobile-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jt-mobile-list a {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--jt-fg-2);
+  text-decoration: none;
+}
+
+.jt-mobile-list a:visited {
+  color: var(--jt-fg-2);
+}
+
+.jt-mobile-list a:hover {
+  background: var(--jt-surface-2);
+  color: var(--jt-fg);
+}
+
+.jt-mobile-list a[aria-current="page"] {
+  background: var(--jt-accent-soft);
+  color: var(--jt-accent);
+  font-weight: 600;
+}
+
+.jt-mobile-list .jt-signout {
+  height: 44px;
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--jt-line);
+  border-radius: 0;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* matches the 715px breakpoint NavBar's resize handler uses */
+@media (max-width: 715px) {
+  .jt-nav {
+    gap: 12px;
+  }
+
+  .jt-nav-links {
+    display: none;
+  }
+
+  .jt-menu-btn {
+    display: inline-flex;
+  }
+}
+
+/* Login page (Login, LoginTitle, LoginCard) */
+.jt-auth-page {
+  --jt-surface: #ffffff;
+  --jt-surface-2: #f0f2f5;
+  --jt-line: #e3e6eb;
+  --jt-line-strong: #cfd4dc;
+  --jt-fg: #151a23;
+  --jt-fg-2: #4a5363;
+  --jt-fg-3: #7b8494;
+  --jt-accent: #2f4fd8;
+  --jt-accent-soft: #e9edfd;
+  --jt-s-rejected: #b7372f;
+  --jt-s-rejected-bg: #fbe9e7;
+
+  box-sizing: border-box;
+  min-height: calc(100vh - 60px);
+  display: grid;
+  place-items: center;
+  padding: 56px 16px 72px;
+  color: var(--jt-fg);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.jt-auth {
+  width: 100%;
+  max-width: 400px;
+  display: grid;
+  gap: 24px;
+}
+
+.jt-auth-intro h2 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.jt-auth-intro p {
+  margin: 6px 0 0;
+  color: var(--jt-fg-2);
+}
+
+.jt-auth-card {
+  padding: 24px;
+  display: grid;
+  gap: 20px;
+  background: var(--jt-surface);
+  border: 1px solid var(--jt-line);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(21, 26, 35, 0.04), 0 1px 1px rgba(21, 26, 35, 0.03);
+}
+
+.jt-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 8px;
+  background: var(--jt-surface-2);
+}
+
+.jt-switch-link,
+.jt-switch-link:visited {
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--jt-fg-2);
+  text-decoration: none;
+}
+
+.jt-switch-link:hover {
+  color: var(--jt-fg);
+}
+
+.jt-switch-link-active,
+.jt-switch-link-active:visited {
+  background: var(--jt-surface);
+  color: var(--jt-fg);
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.jt-auth-card-desc {
+  margin: -8px 0 0;
+  font-size: 13px;
+  color: var(--jt-fg-3);
+}
+
+.jt-auth-form {
+  display: grid;
+  gap: 16px;
+}
+
+.jt-auth-field {
+  display: grid;
+  gap: 6px;
+}
+
+.jt-auth-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--jt-fg-2);
+}
+
+.jt-auth-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.jt-auth-link {
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--jt-accent);
+  background: none;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.jt-auth-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* the ids are needed here to beat the older #email / #password / #incorrectPass rules */
+.jt-auth-field input#email,
+.jt-auth-field input#password,
+.jt-auth-field input#incorrectPass {
+  box-sizing: border-box;
+  width: 100%;
+  height: 42px;
+  margin: 0;
+  padding: 0 12px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--jt-fg);
+  background: #f5f6f8;
+  border: 1px solid var(--jt-line-strong);
+  border-radius: 8px;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+.jt-auth-field input::placeholder {
+  font-size: 14px;
+  color: var(--jt-fg-3);
+}
+
+.jt-auth-field input#email:hover,
+.jt-auth-field input#password:hover {
+  border-color: var(--jt-fg-3);
+}
+
+.jt-auth-field input#email:focus,
+.jt-auth-field input#password:focus,
+.jt-auth-field input#incorrectPass:focus {
+  background: var(--jt-surface);
+  border-color: var(--jt-accent);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--jt-accent-soft);
+}
+
+.jt-auth-field input#incorrectPass {
+  border-color: var(--jt-s-rejected);
+}
+
+.jt-auth-field input#incorrectPass:focus {
+  border-color: var(--jt-s-rejected);
+  box-shadow: 0 0 0 3px var(--jt-s-rejected-bg);
+}
+
+.jt-auth-error {
+  font-size: 12px;
+  color: var(--jt-s-rejected);
+}
+
+.jt-auth-btn {
+  height: 42px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--jt-accent);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.jt-auth-btn:hover {
+  filter: brightness(1.08);
+}
+
+.jt-auth-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.jt-switch-link:focus-visible,
+.jt-auth-link:focus-visible,
+.jt-auth-btn:focus-visible {
+  outline: 2px solid var(--jt-accent);
+  outline-offset: 2px;
+}
+
+.jt-auth-legal {
+  margin: 0;
+  font-size: 12px;
+  color: var(--jt-fg-3);
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .jt-auth-page {
+    place-items: start center;
+    padding: 32px 16px 48px;
+  }
+
+  .jt-auth-card {
+    padding: 20px 16px;
+  }
+
+  .jt-auth-intro h2 {
+    font-size: 23px;
+  }
+}

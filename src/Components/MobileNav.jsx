@@ -6,8 +6,8 @@ const MobileNav = ({ onClick }) => {
   return (
     <>
       {/* <div className="mobileNav-container"> */}
-      <nav className="mobileNav-container">
-        <ul className="mobileNav">
+      <nav className="jt-mobile-nav">
+        <ul className="jt-mobile-list">
           <li>
             <NavLink to="/home" className="" onClick={onClick}>
               Home

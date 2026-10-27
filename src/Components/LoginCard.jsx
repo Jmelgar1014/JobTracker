@@ -41,68 +41,75 @@ const LoginCard = () => {
 
     const isSignInActive = isActive || currentPath === "/";
 
-    return isSignInActive ? "navbar-list-items-active" : "navbar-list-items";
+    return isSignInActive ? "jt-switch-link jt-switch-link-active" : "jt-switch-link";
   };
   const linkClass = ({ isActive }) =>
-    isActive ? "navbar-list-items-active" : "navbar-list-items";
+    isActive ? "jt-switch-link jt-switch-link-active" : "jt-switch-link";
 
   return (
     <>
-      <div className="card-container ">
-        <div className="card component-shadow">
-          <div className="card-title">
-            <div className="card-btns">
-              <NavLink to="/login" className={signInLink}>
-                Sign In
-              </NavLink>
-              <NavLink to="/signup" className={linkClass}>
-                SignUp
-              </NavLink>
-            </div>
-            <p>Enter your credentials to access your account</p>
-          </div>
-          <div className="login-form">
-            <form onSubmit={handleSubmit}>
-              <div className="login">
-                <label htmlFor="email" className="label">
-                  Email
-                </label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  value={email}
-                  placeholder="Enter your email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="login" id="password-input">
-                <label htmlFor="password" className="label">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id={incorrectPass ? "incorrectPass" : "password"}
-                  value={password}
-                  placeholder="Enter your password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                {incorrectPass && (
-                  <span className="incorrectPass">Incorrect Password</span>
-                )}
-              </div>
-              <div className="forgot-password">
-                <button type="button" onClick={forgotPasswordRedirect}>
-                  Forgot your password?
-                </button>
-              </div>
-              <button type="submit" className="login-btn">
-                Sign In
-              </button>
-            </form>
-          </div>
+      <div className="jt-auth-card">
+        <div className="jt-switch">
+          <NavLink to="/login" className={signInLink}>
+            Sign In
+          </NavLink>
+          <NavLink to="/signup" className={linkClass}>
+            SignUp
+          </NavLink>
         </div>
+        <p className="jt-auth-card-desc">
+          Enter your credentials to access your account
+        </p>
+        <form className="jt-auth-form" onSubmit={handleSubmit}>
+          <div className="jt-auth-field">
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              value={email}
+              placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="jt-auth-field">
+            <div className="jt-auth-label-row">
+              <label htmlFor="password">Password</label>
+              <button
+                type="button"
+                className="jt-auth-link"
+                onClick={forgotPasswordRedirect}
+              >
+                Forgot your password?
+              </button>
+            </div>
+            <input
+              type="password"
+              name="password"
+              id={incorrectPass ? "incorrectPass" : "password"}
+              value={password}
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {incorrectPass && (
+              <span className="jt-auth-error">Incorrect Password</span>
+            )}
+          </div>
+          <button type="submit" className="jt-auth-btn">
+            Sign In
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </button>
+        </form>
       </div>
     </>
   );

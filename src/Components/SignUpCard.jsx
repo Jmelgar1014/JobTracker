@@ -30,58 +30,61 @@ const SignUpCard = () => {
     signUp(email, password);
   };
   const linkClass = ({ isActive }) =>
-    isActive ? "navbar-list-items-active" : "navbar-list-items";
+    isActive ? "jt-switch-link jt-switch-link-active" : "jt-switch-link";
 
   return (
     <>
-      <div className="card-container ">
-        <div className="card component-shadow">
-          <div className="card-title">
-            <div className="card-btns">
-              <NavLink to="/login" className={linkClass}>
-                Sign In
-              </NavLink>
-              <NavLink to="/signup" className={linkClass}>
-                SignUp
-              </NavLink>
-            </div>
-            <p>Fill in your information to create an account</p>
-          </div>
-          <div className="login-form">
-            <form action="">
-              <div className="login">
-                <label htmlFor="email" className="label">
-                  Email
-                </label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  value={email}
-                  placeholder="Enter your email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="login" id="password-input">
-                <label htmlFor="password" className="label">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={password}
-                  placeholder="Enter your password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-
-              <button className="login-btn" onClick={handleSubmit}>
-                Sign Up
-              </button>
-            </form>
-          </div>
+      <div className="jt-auth-card">
+        <div className="jt-switch">
+          <NavLink to="/login" className={linkClass}>
+            Sign In
+          </NavLink>
+          <NavLink to="/signup" className={linkClass}>
+            SignUp
+          </NavLink>
         </div>
+        <p className="jt-auth-card-desc">
+          Fill in your information to create an account
+        </p>
+        <form className="jt-auth-form" action="">
+          <div className="jt-auth-field">
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              value={email}
+              placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="jt-auth-field">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={password}
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button className="jt-auth-btn" onClick={handleSubmit}>
+            Sign Up
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </button>
+        </form>
       </div>
     </>
   );
