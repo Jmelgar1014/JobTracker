@@ -2240,3 +2240,123 @@ input::placeholder {
     font-size: 23px;
   }
 }
+
+/* Password reset (ResetCard, ResetConfirmation) */
+.jt-auth-page {
+  --jt-s-offer: #157a4a;
+  --jt-s-offer-bg: #e3f5eb;
+}
+
+.jt-auth-back,
+.jt-auth-back:visited {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--jt-fg-2);
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.jt-auth-back:hover {
+  color: var(--jt-fg);
+}
+
+.jt-auth-back svg {
+  width: 14px;
+  height: 14px;
+}
+
+.jt-auth-badge {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--jt-accent-soft);
+  color: var(--jt-accent);
+}
+
+.jt-auth-badge svg {
+  width: 20px;
+  height: 20px;
+}
+
+.jt-auth-badge-ok {
+  background: var(--jt-s-offer-bg);
+  color: var(--jt-s-offer);
+}
+
+.jt-auth-card .jt-auth-intro h2 {
+  text-wrap: balance;
+}
+
+.jt-auth-divider {
+  height: 1px;
+  background: var(--jt-line);
+}
+
+.jt-auth-alt {
+  margin: 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--jt-fg-3);
+}
+
+.jt-auth-alt a,
+.jt-auth-alt a:visited {
+  font-weight: 600;
+  color: var(--jt-accent);
+  border-radius: 4px;
+}
+
+.jt-auth-alt a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.jt-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  counter-reset: jt-step;
+}
+
+.jt-steps li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--jt-fg-2);
+  counter-increment: jt-step;
+}
+
+.jt-steps li::before {
+  content: counter(jt-step);
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--jt-surface-2);
+  color: var(--jt-fg-2);
+}
+
+.jt-auth-hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--jt-fg-3);
+}
+
+.jt-auth-back:focus-visible,
+.jt-auth-alt a:focus-visible {
+  outline: 2px solid var(--jt-accent);
+  outline-offset: 2px;
+}

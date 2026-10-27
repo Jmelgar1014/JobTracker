@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import supabase from "../../supaBaseData";
 import ResetConfirmation from "./ResetConfirmation";
+import { NavLink } from "react-router-dom";
 
 const ResetCard = () => {
   const [email, setEmail] = useState("");
@@ -28,42 +29,72 @@ const ResetCard = () => {
   return (
     <>
       {!emailSent ? (
-        <div className="verify-page-container">
-          <div className="verify-card component-shadow">
-            <div className="reset-title">
-              <div className="verify-logo">
+        <div className="jt-auth-page">
+          <div className="jt-auth">
+            <NavLink to="/login" className="jt-auth-back">
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M13 8H3M7 4 3 8l4 4" />
+              </svg>
+              Back to Sign In
+            </NavLink>
+            <section className="jt-auth-card">
+              <span className="jt-auth-badge" aria-hidden="true">
                 <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <path
-                    fill="currentColor"
-                    d="M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h16q.825 0 1.413.588T22 6v12q0 .825-.587 1.413T20 20zM20 8l-7.475 4.675q-.125.075-.262.113t-.263.037t-.262-.037t-.263-.113L4 8v10h16zm-8 3l8-5H4zM4 8v.25v-1.475v.025V6v.8v-.012V8.25zv10z"
-                  />
+                  <rect x="4" y="9" width="12" height="8" rx="1.5" />
+                  <path d="M7 9V6.5a3 3 0 0 1 6 0V9" />
+                  <circle cx="10" cy="13" r="1" />
                 </svg>
+              </span>
+              <div className="jt-auth-intro">
+                <h2>Forgot Password?</h2>
+                <p>No worries, we'll send you reset instructions</p>
               </div>
-              <h2 className="reset-h2">Forgot Password?</h2>
-              <p className="reset-desc">
-                No worries, we'll send you reset instructions
+              <div className="jt-auth-form">
+                <div className="jt-auth-field">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <button className="jt-auth-btn" onClick={submitEmail}>
+                  Send Email
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M3 8h10M9 4l4 4-4 4" />
+                  </svg>
+                </button>
+              </div>
+              <div className="jt-auth-divider" />
+              <p className="jt-auth-alt">
+                Remembered it? <NavLink to="/login">Sign in</NavLink>
               </p>
-            </div>
-            <div className="login">
-              <label htmlFor="email" className="label">
-                Email
-              </label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button className="btn" id="reset-btn" onClick={submitEmail}>
-                Send Email
-              </button>
-            </div>
+            </section>
           </div>
         </div>
       ) : (

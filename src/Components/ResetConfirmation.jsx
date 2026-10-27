@@ -1,26 +1,51 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const ResetConfirmation = () => {
   return (
     <>
-      <div className="verify-page-container">
-        <div className="verify-card component-shadow">
-          <div className="reset-title">
-            <div className="verify-logo">
+      <div className="jt-auth-page">
+        <div className="jt-auth">
+          <NavLink to="/login" className="jt-auth-back">
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M13 8H3M7 4 3 8l4 4" />
+            </svg>
+            Back to Sign In
+          </NavLink>
+          <section className="jt-auth-card">
+            <span className="jt-auth-badge jt-auth-badge-ok" aria-hidden="true">
               <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <path
-                  fill="currentColor"
-                  d="M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h16q.825 0 1.413.588T22 6v12q0 .825-.587 1.413T20 20zM20 8l-7.475 4.675q-.125.075-.262.113t-.263.037t-.262-.037t-.263-.113L4 8v10h16zm-8 3l8-5H4zM4 8v.25v-1.475v.025V6v.8v-.012V8.25zv10z"
-                />
+                <rect x="3" y="5" width="14" height="10" rx="1.5" />
+                <path d="m3.5 6 6.5 5 6.5-5" />
               </svg>
+            </span>
+            <div className="jt-auth-intro">
+              <h2>Reset Password email has been sent</h2>
             </div>
-            <h2 className="reset-h2">Reset Password email has been sent</h2>
-          </div>
+            <ol className="jt-steps">
+              <li>Open the email from Job Tracker.</li>
+              <li>Click the reset link and choose a new password.</li>
+              <li>Sign in with your new password.</li>
+            </ol>
+            <p className="jt-auth-hint">
+              Not there after a few minutes? Check your spam folder.
+            </p>
+          </section>
         </div>
       </div>
     </>
