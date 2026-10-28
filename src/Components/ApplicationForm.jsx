@@ -40,6 +40,7 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData, errors }) => {
                 <span className="jt-field-error">Job Title is required </span>
               )}
             </div>
+
             <div className="jt-field">
               <label htmlFor="salary">Salary Range</label>
               <input
@@ -68,6 +69,21 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData, errors }) => {
               {errors.AppliedAt && (
                 <span className="jt-field-error">Date is required </span>
               )}
+            </div>
+            <div className="jt-form-full jt-field">
+              <label htmlFor="jobDescription">Job Description</label>
+              <input
+                type="text"
+                id="jobDescription"
+                name="jobDescription"
+                placeholder="Optional"
+                onChange={handleChange}
+                value={formData.jobDescription}
+                className={errors.jobDescription ? "jt-input-error" : ""}
+              />
+              {/* {errors.jobDesc && (
+                <span className="jt-field-error">Job Title is required </span>
+              )} */}
             </div>
             <div className="jt-field jt-submit">
               <button className="jt-btn-primary" onClick={handleSubmit}>

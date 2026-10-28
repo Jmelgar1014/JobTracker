@@ -20,6 +20,7 @@ import LoginLayout from "./Layouts/LoginLayout";
 import StatsPage from "./Pages/StatsPage";
 import ResetPasswordPage from "./Pages/ResetPasswordPage";
 import NewPasswordPage from "./Pages/NewPasswordPage";
+import ApplicationPage from "./Pages/ApplicationPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -60,6 +61,14 @@ const router = createBrowserRouter(
             }
           />
           <Route
+            path="/applications/:id"
+            element={
+              <Suspense fallback={<Spinner />}>
+                <ApplicationPage />
+              </Suspense>
+            }
+          />
+          <Route
             path="/stats"
             element={
               <Suspense fallback={<Spinner />}>
@@ -69,8 +78,8 @@ const router = createBrowserRouter(
           />
         </Route>
       </Route>
-    </>
-  )
+    </>,
+  ),
 );
 
 const queryClient = new QueryClient();

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DropDown from "./DropDown";
 import TabList from "./TabList";
+import { Link } from "react-router-dom";
 
 const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
   const [filterTab, setFilterTab] = useState("all");
@@ -24,6 +25,7 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
                   <th>Role</th>
                   <th className="jt-num">Salary</th>
                   <th>Applied</th>
+                  <th>Job Description</th>
                   <th>Status</th>
                   <th>
                     <span className="jt-sr-only">Actions</span>
@@ -50,6 +52,11 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
                       </td>
                       <td className="jt-c-date jt-mono">
                         {item.appliedAt.slice(0, 10)}
+                      </td>
+                      <td className="jt-c-salary jt-mono">
+                        <Link to={`/applications/${item.id}`}>
+                          View Details
+                        </Link>
                       </td>
                       <td
                         className="jt-c-status jt-status"

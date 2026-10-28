@@ -21,6 +21,7 @@ export const JobProvider = ({ children }) => {
     salary: "",
     AppliedAt: today(),
     status: "applied",
+    jobDescription: "",
     userId: "",
   });
 
@@ -63,7 +64,10 @@ export const JobProvider = ({ children }) => {
         },
         body: JSON.stringify(status),
       }),
-    onSuccess: () => queryClient.invalidateQueries(["jobs"]),
+    onSuccess: (_, { id }) => {
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["job", String(id)] });
+    },
   });
 
   const validateForm = () => {
@@ -93,7 +97,7 @@ export const JobProvider = ({ children }) => {
       });
       // return res.json();
     },
-    onSuccess: () => queryClient.invalidateQueries(["jobs"]),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["jobs"] }),
   });
 
   const handleSubmit = async (e) => {
@@ -107,6 +111,7 @@ export const JobProvider = ({ children }) => {
       jobTitle: "",
       salary: "",
       AppliedAt: today(),
+      jobDescription: "",
       status: "applied",
     });
   };
@@ -124,7 +129,10 @@ export const JobProvider = ({ children }) => {
         },
       });
     },
-    onSuccess: () => queryClient.invalidateQueries(["jobs"]),
+    onSuccess: (_, itemId) => {
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.removeQueries({ queryKey: ["job", String(itemId)] });
+    },
   });
 
   return (
@@ -145,3 +153,5 @@ export const JobProvider = ({ children }) => {
     </JobContext.Provider>
   );
 };
+
+export { API_URL };
