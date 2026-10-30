@@ -3037,3 +3037,38 @@ input::placeholder {
     display: none;
   }
 }
+
+/* "View Details" link in the applications table, shaped like the status pill */
+.jt-view-pill,
+.jt-view-pill:visited {
+  box-sizing: border-box;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 10px 0 12px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--jt-accent);
+  background: var(--jt-accent-soft);
+  border: 1px solid transparent;
+  border-radius: 99px;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.jt-view-pill:hover {
+  border-color: currentColor;
+}
+
+.jt-view-pill:focus-visible {
+  outline: 2px solid var(--jt-accent);
+  outline-offset: 2px;
+}
+
+.jt-view-pill svg {
+  width: 12px;
+  height: 12px;
+}

@@ -54,8 +54,22 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
                         {item.appliedAt.slice(0, 10)}
                       </td>
                       <td className="jt-c-salary jt-mono">
-                        <Link to={`/applications/${item.id}`}>
+                        <Link
+                          to={`/applications/${item.id}`}
+                          className="jt-view-pill"
+                        >
                           View Details
+                          <svg
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.7"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            aria-hidden="true"
+                          >
+                            <path d="M6 3.5 10.5 8 6 12.5" />
+                          </svg>
                         </Link>
                       </td>
                       <td

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { API_URL } from "../Context/JobProvider";
 import { useAuth } from "../Hooks/useAuth";
 import Spinner from "../Components/Spinner";
+import Jobdescription from "../Components/Jobdescription";
 
 // Markup and styles only; sample values below are placeholders to swap for real data.
 const ApplicationPage = () => {
@@ -28,6 +29,28 @@ const ApplicationPage = () => {
     },
     enabled: !!token,
   });
+
+  const queryClient = useQueryClient();
+
+  const updateJob = useMutation({
+    mutationFn: async (changes) => {
+      const res = await fetch(`${API_URL}/api/jobapplication/${id}`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(changes),
+      });
+      if (!res.ok) throw new Error("Update Failed");
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["job", id] });
+    },
+  });
+
+  const [isEditing, setIsEditing] = useState(false);
 
   if (isLoading) return <Spinner />;
   if (isError) return <p>Job not found</p>;
@@ -96,7 +119,12 @@ const ApplicationPage = () => {
                   </svg>
                   Copy
                 </button>
-                <button className="jt-d-btn" type="button">
+
+                <button
+                  className="jt-d-btn"
+                  type="button"
+                  onClick={() => setIsEditing(true)}
+                >
                   <svg
                     viewBox="0 0 16 16"
                     fill="none"
@@ -114,7 +142,19 @@ const ApplicationPage = () => {
             </div>
             {/* Empty state: shown when there is no description */}
             <div className="jt-d-sec-body">
-              <div className="jt-d-jd">{job.jobDescription}</div>
+              <div className="jt-d-jd">
+                <Jobdescription
+                  jobDescriptionText={job.jobDescription}
+                  isEditing={isEditing}
+                  setIsEditing={setIsEditing}
+                  onSave={(text) =>
+                    updateJob.mutate(
+                      { jobDescription: text },
+                      { onSuccess: () => setIsEditing(false) },
+                    )
+                  }
+                />
+              </div>
             </div>
 
             {/* Edit state: shown while editing the description */}
