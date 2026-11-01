@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const DescriptionEditor = ({ initialText, onCancel, onSave }) => {
+const DescriptionEditor = ({ initialText, onCancel, onSave, isEditing }) => {
   const [text, setText] = useState(initialText);
+  const textRef = useRef(null);
+  useEffect(() => {
+    if (isEditing) {
+      textRef.current.focus();
+    }
+  }, []);
   return (
     <div>
       <textarea
+        ref={textRef}
         name=""
         id=""
         value={text}

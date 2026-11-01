@@ -12,6 +12,7 @@ const Jobdescription = ({
         initialText={jobDescriptionText}
         onCancel={() => setIsEditing(false)}
         onSave={onSave}
+        isEditing={isEditing}
       />
     );
   }

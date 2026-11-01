@@ -2,9 +2,22 @@ import React, { useState } from "react";
 import DropDown from "./DropDown";
 import TabList from "./TabList";
 import { Link } from "react-router-dom";
+import DeleteModal from "./DeleteModal";
 
 const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
   const [filterTab, setFilterTab] = useState("all");
+  const [jobToDelete, setJobToDelete] = useState(null);
+
+  const isOpen = jobToDelete !== null;
+
+  const setJobToNull = () => {
+    setJobToDelete(null);
+  };
+
+  const deleteJobAndReset = (jobId) => {
+    deleteJob(jobId);
+    setJobToDelete(null);
+  };
 
   const filteredJobs =
     filterTab === "all" ? jobs : jobs.filter((job) => job.status === filterTab);
@@ -88,7 +101,7 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
                           key={item.id}
                           className="jt-icon-btn"
                           aria-label={`Delete ${item.company} application`}
-                          onClick={() => deleteJob(item.id)}
+                          onClick={() => setJobToDelete(item)}
                         >
                           <svg
                             viewBox="0 0 16 16"
@@ -110,6 +123,12 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
           </div>
         </section>
       </div>
+      <DeleteModal
+        isOpen={isOpen}
+        job={jobToDelete}
+        onConfirm={deleteJobAndReset}
+        onCancel={setJobToNull}
+      />
     </>
   );
 };
