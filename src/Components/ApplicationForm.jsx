@@ -1,6 +1,12 @@
 import React from "react";
 import JobList from "./JobList";
-const ApplicationForm = ({ handleChange, handleSubmit, formData, errors }) => {
+const ApplicationForm = ({
+  handleChange,
+  handleSubmit,
+  formData,
+  errors,
+  submitLoading,
+}) => {
   return (
     <>
       <div className="application-container">
@@ -86,7 +92,11 @@ const ApplicationForm = ({ handleChange, handleSubmit, formData, errors }) => {
               )} */}
             </div>
             <div className="jt-field jt-submit">
-              <button className="jt-btn-primary" onClick={handleSubmit}>
+              <button
+                className="jt-btn-primary"
+                onClick={handleSubmit}
+                disabled={submitLoading}
+              >
                 Add Application
               </button>
             </div>

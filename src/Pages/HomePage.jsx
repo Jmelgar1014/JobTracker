@@ -19,6 +19,7 @@ const HomePage = () => {
     handleStatusChange,
     deleteJob,
     recentJobs,
+    submitLoading,
   } = useJob();
 
   return (
@@ -29,6 +30,7 @@ const HomePage = () => {
         handleSubmit={handleSubmit}
         formData={formData}
         errors={errors}
+        submitLoading={submitLoading}
       />
       <MinimalCount count={jobs} />
       {loading ? (

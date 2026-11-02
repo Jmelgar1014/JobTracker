@@ -87,7 +87,7 @@ export const JobProvider = ({ children }) => {
 
   const addJob = useMutation({
     mutationFn: async (newJob) => {
-      await fetch(`${API_URL}/api/jobapplication`, {
+      const res = await fetch(`${API_URL}/api/jobapplication`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -95,7 +95,7 @@ export const JobProvider = ({ children }) => {
         },
         body: JSON.stringify(newJob),
       });
-      // return res.json();
+      if (!res.ok) throw new Error("Failed to add job");
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["jobs"] }),
   });
@@ -104,16 +104,21 @@ export const JobProvider = ({ children }) => {
     e.preventDefault();
     if (!validateForm()) return;
 
-    const payload = { ...formData, userId: user.id };
-    await addJob.mutateAsync(payload);
-    setFormData({
-      company: "",
-      jobTitle: "",
-      salary: "",
-      AppliedAt: today(),
-      jobDescription: "",
-      status: "applied",
-    });
+    try {
+      const payload = { ...formData, userId: user.id };
+
+      await addJob.mutateAsync(payload);
+      setFormData({
+        company: "",
+        jobTitle: "",
+        salary: "",
+        AppliedAt: today(),
+        jobDescription: "",
+        status: "applied",
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleStatusChange = async (newStatus, itemId) => {
@@ -147,6 +152,7 @@ export const JobProvider = ({ children }) => {
         handleStatusChange,
         deleteJob: (id) => deleteJob.mutate(id),
         recentJobs,
+        submitLoading: addJob.isPending,
       }}
     >
       {children}
