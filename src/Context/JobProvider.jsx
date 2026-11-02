@@ -23,6 +23,7 @@ export const JobProvider = ({ children }) => {
     status: "applied",
     jobDescription: "",
     userId: "",
+    location: "",
   });
 
   const { data: jobs = [], isLoading: loading } = useQuery({
@@ -115,6 +116,7 @@ export const JobProvider = ({ children }) => {
         AppliedAt: today(),
         jobDescription: "",
         status: "applied",
+        location: "",
       });
     } catch (e) {
       console.log(e);

@@ -6,10 +6,13 @@ const DescriptionEditor = ({ initialText, onCancel, onSave, isEditing }) => {
   useEffect(() => {
     if (isEditing) {
       textRef.current.focus();
+      const end = textRef.current.value.length;
+
+      textRef.current.setSelectionRange(end, end);
     }
   }, []);
   return (
-    <div>
+    <div className="jt-d-editor">
       <textarea
         ref={textRef}
         name=""
@@ -18,12 +21,24 @@ const DescriptionEditor = ({ initialText, onCancel, onSave, isEditing }) => {
         onChange={(e) => setText(e.target.value)}
         rows={10}
       />
-      <button type="button" onClick={onCancel}>
-        Cancel
-      </button>
-      <button type="button" onClick={() => onSave(text)}>
-        Save
-      </button>
+      <div className="jt-d-editor-foot">
+        <div className="jt-d-sec-actions">
+          <button
+            className="jt-d-btn jt-d-btn-quiet"
+            type="button"
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+          <button
+            className="jt-d-btn jt-d-btn-primary"
+            type="button"
+            onClick={() => onSave(text)}
+          >
+            Save
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

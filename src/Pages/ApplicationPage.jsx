@@ -5,9 +5,12 @@ import { API_URL } from "../Context/JobProvider";
 import { useAuth } from "../Hooks/useAuth";
 import Spinner from "../Components/Spinner";
 import Jobdescription from "../Components/Jobdescription";
+import DropDown from "../Components/DropDown";
+import { useJob } from "../Hooks/useJob";
 
 // Markup and styles only; sample values below are placeholders to swap for real data.
 const ApplicationPage = () => {
+  const { handleStatusChange } = useJob();
   const { token } = useAuth();
   const { id } = useParams();
   const {
@@ -88,13 +91,11 @@ const ApplicationPage = () => {
             </div>
             <div className="jt-d-hero-actions">
               {/* data-s takes the lowercase status, like the table's status pill */}
-              <div className="jt-status jt-d-status" data-s="interview">
-                <select name="status" aria-label="Application status">
-                  <option value="applied">Applied</option>
-                  <option value="interview">Interview</option>
-                  <option value="offer">Offer</option>
-                  <option value="rejected">Rejected</option>
-                </select>
+              <div className="jt-status jt-d-status" data-s={job.status}>
+                <DropDown
+                  status={job.status}
+                  onChange={(e) => handleStatusChange(e.target.value, job.id)}
+                />
               </div>
             </div>
           </div>
@@ -168,21 +169,19 @@ const ApplicationPage = () => {
               <dl className="jt-d-facts">
                 <div className="jt-d-fact">
                   <dt>Salary</dt>
-                  <dd className="jt-mono">{job.salary}</dd>
+                  <dd className="jt-mono">${job.salary}</dd>
                 </div>
                 <div className="jt-d-fact">
                   <dt>Applied</dt>
                   <dd>
-                    <span className="jt-mono">{job.appliedAt}</span>
+                    <span className="jt-mono">
+                      {job.appliedAt.slice(0, 10)}
+                    </span>
                   </dd>
                 </div>
                 <div className="jt-d-fact">
                   <dt>Location</dt>
-                  <dd>Remote (US)</dd>
-                </div>
-                <div className="jt-d-fact">
-                  <dt>Source</dt>
-                  <dd>LinkedIn</dd>
+                  <dd>{job.location}</dd>
                 </div>
               </dl>
             </section>

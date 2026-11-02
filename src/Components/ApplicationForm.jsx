@@ -32,6 +32,21 @@ const ApplicationForm = ({
               )}
             </div>
             <div className="jt-field">
+              <label htmlFor="company">Location</label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                placeholder="e.g. Google, Microsoft, Startup Inc."
+                onChange={handleChange}
+                value={formData.location}
+                className={errors.location ? "jt-input-error" : ""}
+              />
+              {errors.location && (
+                <span className="jt-field-error">Location is required </span>
+              )}
+            </div>
+            <div className="jt-field">
               <label htmlFor="jobTitle">Job Title</label>
               <input
                 type="text"
