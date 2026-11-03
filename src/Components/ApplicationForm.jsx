@@ -32,7 +32,7 @@ const ApplicationForm = ({
               )}
             </div>
             <div className="jt-field">
-              <label htmlFor="company">Location</label>
+              <label htmlFor="location">Location</label>
               <input
                 type="text"
                 id="location"
