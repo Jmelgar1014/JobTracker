@@ -106,7 +106,15 @@ export const JobProvider = ({ children }) => {
     if (!validateForm()) return;
 
     try {
-      const payload = { ...formData, userId: user.id };
+      const [year, month, day] = formData.AppliedAt.split("-").map(Number);
+      const appliedAt = new Date();
+
+      appliedAt.setFullYear(year, month - 1, day);
+      const payload = {
+        ...formData,
+        appliedAt: appliedAt.toISOString(),
+        userId: user.id,
+      };
 
       await addJob.mutateAsync(payload);
       setFormData({
