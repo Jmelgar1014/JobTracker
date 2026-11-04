@@ -58,7 +58,7 @@ export const JobProvider = ({ children }) => {
     placeholderData: keepPreviousData,
   });
 
-  const recentJobs = data?.items.slice(0, 10) ?? [];
+  const recentJobs = data?.items?.slice(0, 10) ?? [];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
