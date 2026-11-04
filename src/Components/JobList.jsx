@@ -3,7 +3,7 @@ import DropDown from "./DropDown";
 import { Link } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 
-const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
+const JobList = ({ jobs, handleStatusChange, deleteJob, offset }) => {
   const [jobToDelete, setJobToDelete] = useState(null);
 
   const isOpen = jobToDelete !== null;
@@ -46,7 +46,7 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
                       <td className="jt-c-company">
                         <div className="jt-company">
                           <span className="jt-logo" aria-hidden="true">
-                            {index + 1}
+                            {offset + index + 1}
                           </span>
                           <span className="jt-company-name">
                             {item.company}

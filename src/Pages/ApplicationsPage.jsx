@@ -23,9 +23,10 @@ const ApplicationsPage = () => {
         <Spinner />
       ) : data?.items?.length > 0 ? (
         <JobList
-          jobs={data.items}
+          jobs={data?.items}
           handleStatusChange={handleStatusChange}
           deleteJob={deleteJob}
+          offset={(data.page - 1) * data.pageSize}
         />
       ) : (
         <EmptyList />
