@@ -3,7 +3,7 @@ import DropDown from "./DropDown";
 import { Link } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 
-const JobList = ({ jobs, handleStatusChange, deleteJob, offset }) => {
+const JobList = ({ jobs, handleStatusChange, deleteJob, offset = 0 }) => {
   const [jobToDelete, setJobToDelete] = useState(null);
 
   const isOpen = jobToDelete !== null;

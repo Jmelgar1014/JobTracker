@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "../Components/NavBar";
 import { ApplicationTitle } from "../Components/ApplicationTitle";
 import ApplicationForm from "../Components/ApplicationForm";
@@ -23,7 +23,12 @@ const HomePage = () => {
     submitLoading,
     tabChange,
     filterTab,
+    newPage,
   } = useJob();
+
+  useEffect(() => {
+    newPage(1);
+  }, []);
 
   return (
     <>
