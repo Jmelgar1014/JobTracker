@@ -20,7 +20,7 @@ const ApplicationsPage = () => {
       </div>
       {loading ? (
         <Spinner />
-      ) : data.items.length > 0 ? (
+      ) : data?.items?.length > 0 ? (
         <JobList
           jobs={data.items}
           handleStatusChange={handleStatusChange}

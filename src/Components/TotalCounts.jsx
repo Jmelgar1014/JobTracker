@@ -3,7 +3,7 @@ import InterviewCount from "./InterviewCount";
 import OfferCount from "./OfferCount";
 import ApplicationCount from "./ApplicationCount";
 
-const TotalCounts = ({ count }) => {
+const TotalCounts = ({ count = [] }) => {
   return (
     <>
       <div className="count-container">

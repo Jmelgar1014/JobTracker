@@ -41,7 +41,7 @@ const HomePage = () => {
       </div>
       {loading ? (
         <Spinner />
-      ) : data.items.length > 0 ? (
+      ) : data?.items?.length > 0 ? (
         <JobList
           jobs={recentJobs}
           handleStatusChange={handleStatusChange}
