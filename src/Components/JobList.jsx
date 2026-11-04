@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import DropDown from "./DropDown";
-import TabList from "./TabList";
 import { Link } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 
 const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
-  const [filterTab, setFilterTab] = useState("all");
   const [jobToDelete, setJobToDelete] = useState(null);
 
   const isOpen = jobToDelete !== null;
@@ -19,16 +17,12 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
     setJobToDelete(null);
   };
 
-  const filteredJobs =
-    filterTab === "all" ? jobs : jobs.filter((job) => job.status === filterTab);
-
   return (
     <>
       <div className="container ">
         <section className="jt-panel">
           <div className="jt-list-head">
             <h2>Applications</h2>
-            <TabList filterTab={filterTab} setFilterTab={setFilterTab} />
           </div>
           <div className="jt-table-wrap">
             <table className="jt-table">
@@ -46,9 +40,9 @@ const JobList = ({ jobs, handleStatusChange, deleteJob }) => {
                 </tr>
               </thead>
               <tbody>
-                {filteredJobs.map((item, index) => {
+                {jobs?.map((item, index) => {
                   return (
-                    <tr key={index}>
+                    <tr key={item.id}>
                       <td className="jt-c-company">
                         <div className="jt-company">
                           <span className="jt-logo" aria-hidden="true">

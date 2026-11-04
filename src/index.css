@@ -1271,6 +1271,23 @@ input::placeholder {
 }
 
 /* Status filter tabs (TabList) */
+.jt-toolbar {
+  --jt-surface: #ffffff;
+  --jt-surface-2: #f0f2f5;
+  --jt-fg: #151a23;
+  --jt-fg-2: #4a5363;
+  --jt-accent: #2f4fd8;
+
+  box-sizing: border-box;
+  width: calc(100% - 32px);
+  max-width: 65rem;
+  margin: 0 auto;
+}
+
+.jt-toolbar + .container {
+  margin-top: 12px;
+}
+
 .tablist {
   display: inline-flex;
   flex-wrap: wrap;

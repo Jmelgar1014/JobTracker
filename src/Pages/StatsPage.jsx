@@ -12,7 +12,8 @@ import OfferPercentage from "../Components/OfferPercentage";
 import SuccessPercentage from "../Components/SuccessPercentage";
 
 const StatsPage = () => {
-  const { jobs } = useJob();
+  const { data } = useJob();
+  const jobs = data?.items ?? [];
 
   const interviewPercentage = jobs.length
     ? (jobs.filter((item) => item.status == "interview").length / jobs.length) *

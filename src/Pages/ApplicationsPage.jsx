@@ -6,18 +6,23 @@ import Spinner from "../Components/Spinner";
 import TotalCounts from "../Components/TotalCounts";
 import { useJob } from "../Hooks/useJob";
 import TotalCountTitle from "../Components/TotalCountTitle";
+import TabList from "../Components/TabList";
 
 const ApplicationsPage = () => {
-  const { loading, jobs, deleteJob, handleStatusChange } = useJob();
+  const { loading, data, deleteJob, handleStatusChange, tabChange, filterTab } =
+    useJob();
   return (
     <>
       <TotalCountTitle />
-      <TotalCounts count={jobs} />
+      <TotalCounts count={data?.items} />
+      <div className="jt-toolbar">
+        <TabList tabChange={tabChange} filterTab={filterTab} />
+      </div>
       {loading ? (
         <Spinner />
-      ) : jobs.length > 0 ? (
+      ) : data.items.length > 0 ? (
         <JobList
-          jobs={jobs}
+          jobs={data.items}
           handleStatusChange={handleStatusChange}
           deleteJob={deleteJob}
         />

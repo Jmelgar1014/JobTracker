@@ -7,11 +7,12 @@ import EmptyList from "../Components/EmptyList";
 import Spinner from "../Components/Spinner";
 import MinimalCount from "../Components/MinimalCount";
 import { useJob } from "../Hooks/useJob";
+import TabList from "../Components/TabList";
 
 const HomePage = () => {
   const {
     loading,
-    jobs,
+    data,
     errors,
     formData,
     handleChange,
@@ -20,6 +21,8 @@ const HomePage = () => {
     deleteJob,
     recentJobs,
     submitLoading,
+    tabChange,
+    filterTab,
   } = useJob();
 
   return (
@@ -32,10 +35,13 @@ const HomePage = () => {
         errors={errors}
         submitLoading={submitLoading}
       />
-      <MinimalCount count={jobs} />
+      <MinimalCount count={data} />
+      <div className="jt-toolbar">
+        <TabList tabChange={tabChange} filterTab={filterTab} />
+      </div>
       {loading ? (
         <Spinner />
-      ) : jobs.length > 0 ? (
+      ) : data.items.length > 0 ? (
         <JobList
           jobs={recentJobs}
           handleStatusChange={handleStatusChange}

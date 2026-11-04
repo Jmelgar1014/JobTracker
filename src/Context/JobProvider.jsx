@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import { JobContext } from "./JobContext";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  keepPreviousData,
+} from "@tanstack/react-query";
 
 const API_URL = import.meta.env.VITE_API_URL ?? "https://jobtrackerapi.fly.dev";
 export const JobProvider = ({ children }) => {
@@ -12,9 +17,13 @@ export const JobProvider = ({ children }) => {
 
     return `${d.getFullYear()}-${month}-${day}`;
   };
+
+  const pageSize = 20;
   const { token, user } = useAuth();
   const queryClient = useQueryClient();
   const [errors, setErrors] = useState({});
+  const [filterTab, setFilterTab] = useState("all");
+  const [page, setPage] = useState(1);
   const [formData, setFormData] = useState({
     company: "",
     jobTitle: "",
@@ -26,20 +35,30 @@ export const JobProvider = ({ children }) => {
     location: "",
   });
 
-  const { data: jobs = [], isLoading: loading } = useQuery({
-    queryKey: ["jobs"],
+  const filterTabParam = filterTab === "all" ? "" : `&status=${filterTab}`;
+
+  const { data, isLoading: loading } = useQuery({
+    queryKey: ["jobs", page, pageSize, filterTab],
     queryFn: async () => {
-      const response = await fetch(`${API_URL}/api/jobapplication`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `${API_URL}/api/jobapplication?page=${page}&pageSize=${pageSize}${filterTabParam}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
+      if (!response.ok) {
+        throw new Error(`Failed to load jobs (${response.status})`);
+      }
+
       return response.json();
     },
     enabled: !!token,
+    placeholderData: keepPreviousData,
   });
 
-  const recentJobs = jobs.slice(0, 10);
+  const recentJobs = data?.items.slice(0, 10) ?? [];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,15 +75,19 @@ export const JobProvider = ({ children }) => {
   };
 
   const updateJobStatus = useMutation({
-    mutationFn: async ({ id, status }) =>
-      fetch(`${API_URL}/api/jobapplication/${id}`, {
+    mutationFn: async ({ id, status }) => {
+      const response = await fetch(`${API_URL}/api/jobapplication/${id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(status),
-      }),
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to update status (${response.status})`);
+      }
+    },
     onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
       queryClient.invalidateQueries({ queryKey: ["job", String(id)] });
@@ -150,11 +173,15 @@ export const JobProvider = ({ children }) => {
     },
   });
 
+  const tabChange = (tab) => {
+    setFilterTab(tab);
+    setPage(1);
+  };
   return (
     <JobContext.Provider
       value={{
         loading,
-        jobs,
+        data,
         errors,
         formData,
         handleChange,
@@ -163,6 +190,10 @@ export const JobProvider = ({ children }) => {
         deleteJob: (id) => deleteJob.mutate(id),
         recentJobs,
         submitLoading: addJob.isPending,
+        setPage,
+        filterTab,
+        setFilterTab,
+        tabChange,
       }}
     >
       {children}

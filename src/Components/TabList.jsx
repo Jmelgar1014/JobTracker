@@ -1,39 +1,39 @@
 import React from "react";
-const TabList = ({ filterTab, setFilterTab }) => {
+const TabList = ({ tabChange, filterTab }) => {
   return (
     <div className="tablist">
       <button
         type="button"
         aria-pressed={filterTab === "all"}
-        onClick={() => setFilterTab("all")}
+        onClick={() => tabChange("all")}
       >
         All
       </button>
       <button
         type="button"
         aria-pressed={filterTab === "applied"}
-        onClick={() => setFilterTab("applied")}
+        onClick={() => tabChange("applied")}
       >
         Applied
       </button>
       <button
         type="button"
         aria-pressed={filterTab === "interview"}
-        onClick={() => setFilterTab("interview")}
+        onClick={() => tabChange("interview")}
       >
         Interview
       </button>
       <button
         type="button"
         aria-pressed={filterTab === "offer"}
-        onClick={() => setFilterTab("offer")}
+        onClick={() => tabChange("offer")}
       >
         Offer
       </button>
       <button
         type="button"
         aria-pressed={filterTab === "rejected"}
-        onClick={() => setFilterTab("rejected")}
+        onClick={() => tabChange("rejected")}
       >
         Rejected
       </button>
