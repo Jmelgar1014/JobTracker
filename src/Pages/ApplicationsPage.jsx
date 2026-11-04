@@ -7,6 +7,7 @@ import TotalCounts from "../Components/TotalCounts";
 import { useJob } from "../Hooks/useJob";
 import TotalCountTitle from "../Components/TotalCountTitle";
 import TabList from "../Components/TabList";
+import Pagination from "../Components/Pagination";
 
 const ApplicationsPage = () => {
   const { loading, data, deleteJob, handleStatusChange, tabChange, filterTab } =
@@ -29,6 +30,7 @@ const ApplicationsPage = () => {
       ) : (
         <EmptyList />
       )}
+      <Pagination jobs={data} />
     </>
   );
 };

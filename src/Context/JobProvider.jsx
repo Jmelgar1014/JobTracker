@@ -37,7 +37,11 @@ export const JobProvider = ({ children }) => {
 
   const filterTabParam = filterTab === "all" ? "" : `&status=${filterTab}`;
 
-  const { data, isLoading: loading } = useQuery({
+  const {
+    data,
+    isLoading: loading,
+    isPlaceholderData,
+  } = useQuery({
     queryKey: ["jobs", page, pageSize, filterTab],
     queryFn: async () => {
       const response = await fetch(
@@ -177,6 +181,10 @@ export const JobProvider = ({ children }) => {
     setFilterTab(tab);
     setPage(1);
   };
+
+  const newPage = (pageNumber) => {
+    setPage(pageNumber);
+  };
   return (
     <JobContext.Provider
       value={{
@@ -194,6 +202,8 @@ export const JobProvider = ({ children }) => {
         filterTab,
         setFilterTab,
         tabChange,
+        newPage,
+        isPlaceholderData,
       }}
     >
       {children}

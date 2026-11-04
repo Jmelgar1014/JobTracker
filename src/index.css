@@ -1288,6 +1288,82 @@ input::placeholder {
   margin-top: 12px;
 }
 
+/* Pagination below the applications table */
+.jt-pagination {
+  --jt-surface: #ffffff;
+  --jt-surface-2: #f0f2f5;
+  --jt-line: #e3e6eb;
+  --jt-fg: #151a23;
+  --jt-fg-2: #4a5363;
+  --jt-fg-3: #7b8494;
+  --jt-accent: #2f4fd8;
+  --jt-font-data: ui-monospace, "SF Mono", Menlo, monospace;
+
+  box-sizing: border-box;
+  width: calc(100% - 32px);
+  max-width: 65rem;
+  margin: -20px auto 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--jt-fg-3);
+}
+
+.jt-pagination-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 8px;
+  background: var(--jt-surface-2);
+}
+
+.jt-pagination-controls button {
+  font: inherit;
+  font-weight: 500;
+  height: 28px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--jt-surface);
+  color: var(--jt-fg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.jt-pagination-controls button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.jt-pagination-controls button:hover:not(:disabled) {
+  color: var(--jt-accent);
+}
+
+.jt-pagination-controls button:disabled {
+  background: transparent;
+  box-shadow: none;
+  color: var(--jt-fg-3);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.jt-pagination-controls button:focus-visible {
+  outline: 2px solid var(--jt-accent);
+  outline-offset: 2px;
+}
+
+.jt-pagination-page {
+  padding: 0 10px;
+  color: var(--jt-fg-2);
+}
+
 .tablist {
   display: inline-flex;
   flex-wrap: wrap;
