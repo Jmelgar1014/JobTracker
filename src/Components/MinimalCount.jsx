@@ -8,7 +8,7 @@ const MinimalCount = ({ count }) => {
           <div className="jt-stats">
             <div className="jt-stat">
               <span className="jt-stat-label">Total Applications</span>
-              <span className="jt-stat-value">{count?.totalCount ?? 0}</span>
+              <span className="jt-stat-value">{count?.total ?? 0}</span>
             </div>
 
             <div className="jt-stat">
@@ -16,20 +16,14 @@ const MinimalCount = ({ count }) => {
                 <i className="jt-dot jt-dot-interview" />
                 Interviews
               </span>
-              <span className="jt-stat-value">
-                {count?.items?.filter((item) => item.status == "interview")
-                  .length ?? 0}
-              </span>
+              <span className="jt-stat-value">{count?.interviews ?? 0}</span>
             </div>
             <div className="jt-stat">
               <span className="jt-stat-label">
                 <i className="jt-dot jt-dot-offer" />
                 Offers
               </span>
-              <span className="jt-stat-value">
-                {count?.items?.filter((item) => item.status == "offer")
-                  .length ?? 0}
-              </span>
+              <span className="jt-stat-value">{count?.offers ?? 0}</span>
             </div>
           </div>
         </section>

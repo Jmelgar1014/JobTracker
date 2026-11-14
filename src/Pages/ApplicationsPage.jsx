@@ -10,12 +10,19 @@ import TabList from "../Components/TabList";
 import Pagination from "../Components/Pagination";
 
 const ApplicationsPage = () => {
-  const { loading, data, deleteJob, handleStatusChange, tabChange, filterTab } =
-    useJob();
+  const {
+    loading,
+    data,
+    deleteJob,
+    handleStatusChange,
+    tabChange,
+    filterTab,
+    dataStats,
+  } = useJob();
   return (
     <>
       <TotalCountTitle />
-      <TotalCounts count={data?.items} />
+      <TotalCounts count={dataStats} />
       <div className="jt-toolbar">
         <TabList tabChange={tabChange} filterTab={filterTab} />
       </div>

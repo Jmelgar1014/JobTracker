@@ -12,30 +12,17 @@ import OfferPercentage from "../Components/OfferPercentage";
 import SuccessPercentage from "../Components/SuccessPercentage";
 
 const StatsPage = () => {
-  const { data } = useJob();
-  const jobs = data?.items ?? [];
+  const { dataStats = {} } = useJob();
 
-  const interviewPercentage = jobs.length
-    ? (jobs.filter((item) => item.status == "interview").length / jobs.length) *
-      100
-    : 0;
-  const interviewCount = jobs.filter(
-    (item) => item.status == "interview",
-  ).length;
+  const interviewPercentage =
+    (dataStats.total ?? 0) ? (dataStats.interviews / dataStats.total) * 100 : 0;
+  const interviewCount = dataStats.interviews ?? 0;
 
-  const offerPercentage = jobs.length
-    ? (jobs.filter((item) => item.status == "offer").length / jobs.length) * 100
+  const offerPercentage = dataStats.total
+    ? (dataStats.offers / dataStats.total) * 100
     : 0;
 
-  const offerCount = jobs.filter((item) => item.status == "offer").length;
-
-  // const rejectPercentage =
-  //   (jobs.filter((item) => item.status == "rejected").length / jobs.length) *
-  //   100;
-
-  // const noResponseRate =
-  //   (jobs.filter((item) => item.status == "applied").length / jobs.length) *
-  //   100;
+  const offerCount = dataStats.offers ?? 0;
 
   const successPercentage = interviewPercentage + offerPercentage;
 
@@ -48,27 +35,27 @@ const StatsPage = () => {
         <div className="jt-cards">
           <Stat
             statDesc="All submitted job applications"
-            jobs={jobs.length}
+            jobs={dataStats.total ?? 0}
             statName="Total Applications"
           >
             <AppIcon />
           </Stat>
           <Stat
-            jobs={jobs.filter((item) => item.status == "interview").length}
+            jobs={dataStats.interviews ?? 0}
             statName="Interviews"
             statDesc="Applications that led to interviews"
           >
             <InterviewIcon />
           </Stat>
           <Stat
-            jobs={jobs.filter((item) => item.status == "offer").length}
+            jobs={dataStats.offers ?? 0}
             statName="Offers"
             statDesc="Applications that results in job offers"
           >
             <OffierIcon />
           </Stat>
           <Stat
-            jobs={jobs.filter((item) => item.status == "applied").length}
+            jobs={dataStats.applied ?? 0}
             statName="Pending"
             statDesc="Applications awaiting response"
           >
@@ -80,17 +67,17 @@ const StatsPage = () => {
         <InterviewPercentage
           percentage={interviewPercentage.toFixed(1)}
           count={interviewCount}
-          jobs={jobs.length}
+          jobs={dataStats.total ?? 0}
         />
         <OfferPercentage
           percentage={offerPercentage.toFixed(1)}
           count={offerCount}
-          jobs={jobs.length}
+          jobs={dataStats.total ?? 0}
         />
         <SuccessPercentage
           percentage={successPercentage.toFixed(1)}
           count={successCount}
-          jobs={jobs.length}
+          jobs={dataStats.total ?? 0}
         />
       </Metrics>
     </>

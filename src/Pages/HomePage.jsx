@@ -24,6 +24,7 @@ const HomePage = () => {
     tabChange,
     filterTab,
     newPage,
+    dataStats,
   } = useJob();
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const HomePage = () => {
         errors={errors}
         submitLoading={submitLoading}
       />
-      <MinimalCount count={data} />
+      <MinimalCount count={dataStats} />
       <div className="jt-toolbar">
         <TabList tabChange={tabChange} filterTab={filterTab} />
       </div>

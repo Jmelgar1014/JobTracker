@@ -62,6 +62,24 @@ export const JobProvider = ({ children }) => {
     placeholderData: keepPreviousData,
   });
 
+  const { data: dataStats, isLoading: statsLoading } = useQuery({
+    queryKey: ["totals"],
+    queryFn: async () => {
+      const response = await fetch(`${API_URL}/api/jobapplication/stats`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to load job totals ${response.status}`);
+      }
+
+      return response.json();
+    },
+    enabled: !!token,
+  });
+
   const recentJobs = data?.items?.slice(0, 10) ?? [];
 
   const handleChange = (e) => {
@@ -95,6 +113,7 @@ export const JobProvider = ({ children }) => {
     onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
       queryClient.invalidateQueries({ queryKey: ["job", String(id)] });
+      queryClient.invalidateQueries({ queryKey: ["totals"] });
     },
   });
 
@@ -125,7 +144,10 @@ export const JobProvider = ({ children }) => {
       });
       if (!res.ok) throw new Error("Failed to add job");
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["jobs"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
+      queryClient.invalidateQueries({ queryKey: ["totals"] });
+    },
   });
 
   const handleSubmit = async (e) => {
@@ -174,6 +196,7 @@ export const JobProvider = ({ children }) => {
     onSuccess: (_, itemId) => {
       queryClient.invalidateQueries({ queryKey: ["jobs"] });
       queryClient.removeQueries({ queryKey: ["job", String(itemId)] });
+      queryClient.invalidateQueries({ queryKey: ["totals"] });
     },
   });
 
@@ -204,6 +227,8 @@ export const JobProvider = ({ children }) => {
         tabChange,
         newPage,
         isPlaceholderData,
+        dataStats,
+        statsLoading,
       }}
     >
       {children}
