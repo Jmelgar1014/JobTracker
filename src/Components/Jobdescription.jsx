@@ -6,7 +6,7 @@ const Jobdescription = ({
   setIsEditing,
   onSave,
 }) => {
-  if (isEditing) {
+  if (isEditing === "description") {
     return (
       <DescriptionEditor
         initialText={jobDescriptionText}
@@ -41,7 +41,7 @@ const Jobdescription = ({
           <button
             className="jt-d-btn jt-d-btn-primary"
             type="button"
-            onClick={() => setIsEditing(true)}
+            onClick={() => setIsEditing("description")}
           >
             Add description
           </button>

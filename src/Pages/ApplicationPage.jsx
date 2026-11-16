@@ -7,6 +7,7 @@ import Spinner from "../Components/Spinner";
 import Jobdescription from "../Components/Jobdescription";
 import DropDown from "../Components/DropDown";
 import { useJob } from "../Hooks/useJob";
+import { ApplicationDetails } from "../Components/ApplicationDetails";
 
 // Markup and styles only; sample values below are placeholders to swap for real data.
 const ApplicationPage = () => {
@@ -53,7 +54,7 @@ const ApplicationPage = () => {
     },
   });
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(null);
 
   if (isLoading) return <Spinner />;
   if (isError) return <p>Job not found</p>;
@@ -109,7 +110,7 @@ const ApplicationPage = () => {
                 <button
                   className="jt-d-btn"
                   type="button"
-                  onClick={() => setIsEditing(true)}
+                  onClick={() => setIsEditing("description")}
                 >
                   <svg
                     viewBox="0 0 16 16"
@@ -136,7 +137,7 @@ const ApplicationPage = () => {
                   onSave={(text) =>
                     updateJob.mutate(
                       { jobDescription: text },
-                      { onSuccess: () => setIsEditing(false) },
+                      { onSuccess: () => setIsEditing(null) },
                     )
                   }
                 />
@@ -150,25 +151,38 @@ const ApplicationPage = () => {
             <section className="jt-panel" aria-labelledby="jt-d-details-h">
               <div className="jt-d-sec-head">
                 <h2 id="jt-d-details-h">Details</h2>
+
+                <button
+                  className="jt-d-btn"
+                  type="button"
+                  onClick={() => setIsEditing("details")}
+                >
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M11 2.5 13.5 5 6 12.5H3.5V10Z" />
+                  </svg>
+                  Edit
+                </button>
               </div>
-              <dl className="jt-d-facts">
-                <div className="jt-d-fact">
-                  <dt>Salary</dt>
-                  <dd className="jt-mono">${job.salary}</dd>
-                </div>
-                <div className="jt-d-fact">
-                  <dt>Applied</dt>
-                  <dd>
-                    <span className="jt-mono">
-                      {job.appliedAt.slice(0, 10)}
-                    </span>
-                  </dd>
-                </div>
-                <div className="jt-d-fact">
-                  <dt>Location</dt>
-                  <dd>{job.location}</dd>
-                </div>
-              </dl>
+              <ApplicationDetails
+                job={job}
+                detailEdit={isEditing}
+                setEdit={setIsEditing}
+                saving={updateJob.isPending}
+                saveError={updateJob.isError}
+                onSave={(fields) =>
+                  updateJob.mutate(fields, {
+                    onSuccess: () => setIsEditing(null),
+                  })
+                }
+              />
             </section>
 
             <section className="jt-panel" aria-labelledby="jt-d-notes-h">
