@@ -2945,6 +2945,31 @@ input::placeholder {
   color: var(--jt-fg-3);
 }
 
+/* Inputs in the Details editor (ApplicationDetailEditor) */
+.jt-d-facts-edit .jt-d-fact {
+  align-items: center;
+}
+
+.jt-d-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--jt-fg);
+  background: var(--jt-bg);
+  border: 1px solid var(--jt-line-strong);
+  border-radius: 8px;
+}
+
+.jt-d-input:focus {
+  background: var(--jt-surface);
+  border-color: var(--jt-accent);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--jt-accent-soft);
+}
+
 .jt-d-notes {
   min-height: 120px;
 }

@@ -34,13 +34,15 @@ export const ApplicationDetailEditor = ({
 
   return (
     <>
-      <dl className="jt-d-facts">
+      <dl className="jt-d-facts jt-d-facts-edit">
         <div className="jt-d-fact">
           <dt>Salary</dt>
           <dd className="jt-mono">
             <input
+              className="jt-d-input"
               type="text"
               name="salary"
+              aria-label="Salary"
               value={fields.salary}
               onChange={handleChange}
             />
@@ -48,23 +50,25 @@ export const ApplicationDetailEditor = ({
         </div>
         <div className="jt-d-fact">
           <dt>Applied</dt>
-          <dd>
-            <span className="jt-mono">
-              <input
-                type="date"
-                name="appliedAt"
-                value={fields.appliedAt}
-                onChange={handleChange}
-              />
-            </span>
+          <dd className="jt-mono">
+            <input
+              className="jt-d-input"
+              type="date"
+              name="appliedAt"
+              aria-label="Applied date"
+              value={fields.appliedAt}
+              onChange={handleChange}
+            />
           </dd>
         </div>
         <div className="jt-d-fact">
           <dt>Location</dt>
           <dd>
             <input
+              className="jt-d-input"
               type="text"
               name="location"
+              aria-label="Location"
               value={fields.location}
               onChange={handleChange}
             />
